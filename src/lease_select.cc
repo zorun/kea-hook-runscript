@@ -4,6 +4,9 @@
 #include <dhcp/pkt6.h>
 #include <dhcpsrv/lease.h>
 
+#include <string>
+#include <vector>
+
 #include "runscript.h"
 
 using namespace isc::dhcp;
@@ -13,7 +16,8 @@ extern "C" {
 
 int lease4_select(CalloutHandle& handle) {
     int ret;
-    char *env[] = { "FOO=bar", (char *)NULL };
+    std::vector<std::string> env;
+    env.push_back("FOO=bar");
     ret = run_script("lease4_select", env);
     fprintf(stderr, "ret = %d\n", ret);
     return 0;
