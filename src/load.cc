@@ -1,11 +1,15 @@
 #include <hooks/hooks.h>
 
+#include "common.h"
+
 using namespace isc::hooks;
 using namespace isc::data;
 
-/* Path of the script to run in hooks, accessed by the other files of this
- * library. */
+/* Path of the script to be run in hooks, accessed by the other files of
+ * this library. */
 std::string script_path;
+/* Name of the script (without the leading directory). */
+std::string script_name;
 
 extern "C" {
 
@@ -18,7 +22,8 @@ int load(LibraryHandle& handle) {
         return 1;
     }
     script_path = script->stringValue();
-    
+    script_name = script_path.substr(script_path.find_last_of('/') + 1);
+
     return 0;
 }
 

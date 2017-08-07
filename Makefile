@@ -11,6 +11,8 @@ kea-hook-runscript.so: $(OBJECTS)
 
 src/pkt_receive.o: src/runscript.h
 src/lease_select.o: src/runscript.h
+src/load.o: src/common.h
+src/runscript.o: src/common.h
 
 clean:
 	rm -f src/*.o

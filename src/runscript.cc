@@ -6,12 +6,14 @@
 // TODO: Not nescessary
 #include <stdio.h>
 
+#include "common.h"
+
 extern "C" {
 
-/* Runs the given script with the given argument and environment
- * variables.  Returns -1 upon failure, or the exit code of the script
- * upon success. */
-int run_script(const char *scriptpath, const char *arg0, char *const *envp)
+/* Runs the configured script with the given (single) argument and
+ * environment variables.  Returns -1 upon failure, or the exit code of
+ * the script upon success. */
+int run_script(const char *arg0, char *const *envp)
 {
     int ret, wstatus, exitcode;
     pid_t pid;
@@ -23,11 +25,7 @@ int run_script(const char *scriptpath, const char *arg0, char *const *envp)
     }
     if (pid == 0) {
         /* Child process */
-        const char *scriptname = strrchr(scriptpath, '/');
-        if (scriptname == NULL) {
-            scriptname = scriptpath + strlen(scriptpath);
-        }
-        ret = execle(scriptpath, scriptname, arg0, (char *)NULL, envp);
+        ret = execle(script_path.data(), script_name.data(), arg0, (char *)NULL, envp);
         // TODO: logging, errno is usable
         fprintf(stderr, "Error during execle() in child\n");
         exit(EXIT_FAILURE);

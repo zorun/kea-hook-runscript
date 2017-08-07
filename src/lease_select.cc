@@ -9,15 +9,12 @@
 using namespace isc::dhcp;
 using namespace isc::hooks;
 
-/* From load.cc */
-extern std::string script_path;
-
 extern "C" {
 
 int lease4_select(CalloutHandle& handle) {
     int ret;
     char *env[] = { "FOO=bar", (char *)NULL };
-    ret = run_script(script_path.data(), "lease4_select", env);
+    ret = run_script("lease4_select", env);
     fprintf(stderr, "ret = %d\n", ret);
     return 0;
 }
