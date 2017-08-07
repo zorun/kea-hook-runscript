@@ -1,5 +1,6 @@
 #include <hooks/hooks.h>
 
+#include "logger.h"
 #include "common.h"
 
 using namespace isc::hooks;
@@ -16,9 +17,11 @@ extern "C" {
 int load(LibraryHandle& handle) {
     ConstElementPtr script = handle.getParameter("script");
     if (!script) {
+        LOG_ERROR(runscript_logger, RUNSCRIPT_MISSING_PARAM).arg("script");
         return 1;
     }
     if (script->getType() != Element::string) {
+        LOG_ERROR(runscript_logger, RUNSCRIPT_MISTYPED_PARAM).arg("script");
         return 1;
     }
     script_path = script->stringValue();

@@ -1,0 +1,9 @@
+% RUNSCRIPT_MISSING_PARAM required parameter "%1" missing in configuration
+A required parameter of this library hook is missing in the configuration,
+which prevents the library from working correctly.
+
+% RUNSCRIPT_MISTYPED_PARAM parameter "%1" in configuration has wrong type
+A parameter of this library hook is defined in the configuration but has the
+wrong type.  For instance, a string may have been passed as parameter while
+an integer was expected.
+
