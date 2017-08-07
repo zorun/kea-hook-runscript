@@ -6,10 +6,12 @@
 // TODO: Not nescessary
 #include <stdio.h>
 
+extern "C" {
+
 /* Runs the given script with the given argument and environment
  * variables.  Returns -1 upon failure, or the exit code of the script
  * upon success. */
-int run_script(char *scriptpath, const char *arg0, char *const *envp)
+int run_script(const char *scriptpath, const char *arg0, char *const *envp)
 {
     int ret, wstatus, exitcode;
     pid_t pid;
@@ -21,7 +23,7 @@ int run_script(char *scriptpath, const char *arg0, char *const *envp)
     }
     if (pid == 0) {
         /* Child process */
-        char *scriptname = strrchr(scriptpath, '/');
+        const char *scriptname = strrchr(scriptpath, '/');
         if (scriptname == NULL) {
             scriptname = scriptpath + strlen(scriptpath);
         }
@@ -47,3 +49,5 @@ int run_script(char *scriptpath, const char *arg0, char *const *envp)
         return exitcode;
     }
 }
+
+} // end extern "C"
