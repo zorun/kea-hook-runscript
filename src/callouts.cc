@@ -15,10 +15,10 @@ using namespace isc::hooks;
 
 extern "C" {
 
-int pkt4_receive(CalloutHandle& handle) {
-    std::vector<std::string> env;
-    Pkt4Ptr query;
-    handle.getArgument("query4", query);
+/* These are helpers that extract relevant information from Kea data
+ * structures and store them in environment variables. */
+void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
+{
     /* General information */
     env.push_back("DHCP4_TYPE=" + std::to_string(query->getType()));
     /* Hardware address */
@@ -28,6 +28,14 @@ int pkt4_receive(CalloutHandle& handle) {
     env.push_back("HWADDR=" + hwaddr->toText(false));
     /* Misc */
     env.push_back("DHCP4_RELAYED=" + std::to_string(query->isRelayed()));
+}
+
+/* IPv4 callouts */
+int pkt4_receive(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr query;
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
     /* Run script */
     int ret;
     ret = run_script("pkt4_receive", env);
@@ -42,6 +50,7 @@ int lease4_select(CalloutHandle& handle) {
     bool fake_allocation;
     Lease4Ptr lease;
     handle.getArgument("query4", query);
+    extract_query4(env, query);
     handle.getArgument("subnet4", subnet);
     handle.getArgument("fake_allocation", fake_allocation);
     handle.getArgument("lease4", lease);
@@ -51,5 +60,7 @@ int lease4_select(CalloutHandle& handle) {
     fprintf(stderr, "ret = %d\n", ret);
     return 0;
 }
+
+/* IPv6 callouts */
 
 } // end extern "C"
