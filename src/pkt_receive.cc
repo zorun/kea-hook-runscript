@@ -14,10 +14,20 @@ using namespace isc::hooks;
 extern "C" {
 
 int pkt4_receive(CalloutHandle& handle) {
-    int ret;
     std::vector<std::string> env;
-    env.push_back("DHCP4_RELAYED=1");
-    env.push_back("HWADDR_TYPE=foo");
+    Pkt4Ptr query;
+    handle.getArgument("query4", query);
+    /* General information */
+    env.push_back("DHCP4_TYPE=" + std::to_string(query->getType()));
+    /* Hardware address */
+    HWAddrPtr hwaddr = query->getHWAddr();
+    env.push_back("HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+    env.push_back("HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+    env.push_back("HWADDR=" + hwaddr->toText(false));
+    /* Misc */
+    env.push_back("DHCP4_RELAYED=" + std::to_string(query->isRelayed()));
+    /* Run script */
+    int ret;
     ret = run_script("pkt4_receive", env);
     fprintf(stderr, "ret = %d\n", ret);
     return 0;
