@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-// TODO: Not nescessary
-#include <stdio.h>
 
 #include <string>
 #include <vector>
+#include <cerrno>
 
+#include "logger.h"
 #include "common.h"
 
 extern "C" {
@@ -27,23 +27,21 @@ int run_script(std::string arg0, std::vector<std::string> env)
     pid_t pid;
     pid = fork();
     if (pid == -1) {
-        // TODO: logging, errno is usable
-        fprintf(stderr, "Error during fork()\n");
+        LOG_ERROR(runscript_logger, RUNSCRIPT_FORK_FAILED).arg(strerror(errno));
         return -1;
     }
     if (pid == 0) {
         /* Child process */
         ret = execle(script_path.data(), script_name.data(), arg0.data(), (char *)NULL, envp);
-        // TODO: logging, errno is usable
-        fprintf(stderr, "Error during execle() in child\n");
+        LOG_ERROR(runscript_logger, RUNSCRIPT_EXEC_FAILED).arg(strerror(errno));
+        /* This only exists the child, not Kea itself. */
         exit(EXIT_FAILURE);
     } else {
         /* Parent process */
-        fprintf(stderr, "Waiting for script to return...\n");
+        LOG_DEBUG(runscript_logger, 50, RUNSCRIPT_WAITING_SCRIPT);
         ret = wait(&wstatus);
         if (ret == -1) {
-            // TODO: logging, errno is usable
-            fprintf(stderr, "waitpid() failure\n");
+            LOG_ERROR(runscript_logger, RUNSCRIPT_WAITPID_FAILED).arg(strerror(errno));
             return -1;
         }
         /* Get exit code */

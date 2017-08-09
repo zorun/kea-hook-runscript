@@ -39,7 +39,6 @@ int pkt4_receive(CalloutHandle& handle) {
     /* Run script */
     int ret;
     ret = run_script("pkt4_receive", env);
-    fprintf(stderr, "ret = %d\n", ret);
     return 0;
 }
 
@@ -57,7 +56,6 @@ int lease4_select(CalloutHandle& handle) {
     /* Run script */
     int ret;
     ret = run_script("lease4_select", env);
-    fprintf(stderr, "ret = %d\n", ret);
     return 0;
 }
 

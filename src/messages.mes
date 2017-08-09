@@ -7,3 +7,18 @@ A parameter of this library hook is defined in the configuration but has the
 wrong type.  For instance, a string may have been passed as parameter while
 an integer was expected.
 
+% RUNSCRIPT_FORK_FAILED fork() failed with error: %1
+Running the user-defined script is done with fork + exec, and there was an error
+during the fork, possibly due to a lack of resources.
+
+% RUNSCRIPT_EXEC_FAILED exec() failed, please check that the script exists and is executable. Error: %1
+Attempting to execute the user-defined script failed.
+
+% RUNSCRIPT_WAITPID_FAILED waitpid() failed with error: %1
+The main hook process failed to wait for the child process to exit.
+The hook runs the user-defined script in a child process, and normally waits for it to exit.
+
+% RUNSCRIPT_WAITING_SCRIPT the user-defined script is running, and the main process is currently waiting
+The user-defined script has just been launched, and Kea is waiting for it to exit.
+This is useful to know, because if the user-defined script blocks, Kea will stay stuck
+at this point.
