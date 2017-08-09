@@ -20,14 +20,33 @@ extern "C" {
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 {
     /* General information */
-    env.push_back("DHCP4_TYPE=" + std::to_string(query->getType()));
+    env.push_back("QUERY4_TYPE=" + std::to_string(query->getType()));
     /* Hardware address */
     HWAddrPtr hwaddr = query->getHWAddr();
-    env.push_back("HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
-    env.push_back("HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
-    env.push_back("HWADDR=" + hwaddr->toText(false));
+    env.push_back("QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+    env.push_back("QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+    env.push_back("QUERY4_HWADDR=" + hwaddr->toText(false));
     /* Misc */
-    env.push_back("DHCP4_RELAYED=" + std::to_string(query->isRelayed()));
+    env.push_back("QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
+}
+
+void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
+{
+    /* General information */
+    env.push_back("RESPONSE4_TYPE=" + std::to_string(response->getType()));
+}
+
+void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
+{
+    env.push_back("SUBNET4=" + subnet->toText());
+    std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
+    env.push_back("SUBNET4_PREFIX=" + prefix.first.toText());
+    env.push_back("SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
+}
+
+void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
+{
+    env.push_back("LEASE4_ADDRESS=" + lease->addr_.toText());
 }
 
 /* IPv4 callouts */
@@ -42,6 +61,20 @@ int pkt4_receive(CalloutHandle& handle) {
     return 0;
 }
 
+int subnet4_select(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr query;
+    Subnet4Ptr subnet;
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
+    handle.getArgument("subnet4", subnet);
+    extract_subnet4(env, subnet);
+    /* Run script */
+    int ret;
+    ret = run_script("subnet4_select", env);
+    return 0;
+}
+
 int lease4_select(CalloutHandle& handle) {
     std::vector<std::string> env;
     Pkt4Ptr query;
@@ -51,11 +84,76 @@ int lease4_select(CalloutHandle& handle) {
     handle.getArgument("query4", query);
     extract_query4(env, query);
     handle.getArgument("subnet4", subnet);
+    extract_subnet4(env, subnet);
     handle.getArgument("fake_allocation", fake_allocation);
+    env.push_back("FAKE_ALLOCATION=" + fake_allocation ? "1" : "0");
     handle.getArgument("lease4", lease);
+    extract_lease4(env, lease);
     /* Run script */
     int ret;
     ret = run_script("lease4_select", env);
+    return 0;
+}
+
+int lease4_renew(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr query;
+    Subnet4Ptr subnet;
+    Lease4Ptr lease;
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
+    handle.getArgument("subnet4", subnet);
+    extract_subnet4(env, subnet);
+    /* TODO: what is this?  Is it different from what is in the query? */
+    //handle.getArgument("clientid", XX);
+    //handle.getArgument("hwaddr", XX);
+    handle.getArgument("lease4", lease);
+    extract_lease4(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease4_renew", env);
+    return 0;
+}
+
+int lease4_release(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr query;
+    Lease4Ptr lease;
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
+    handle.getArgument("lease4", lease);
+    extract_lease4(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease4_release", env);
+    return 0;
+}
+
+int lease4_decline(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr query;
+    Lease4Ptr lease;
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
+    handle.getArgument("lease4", lease);
+    extract_lease4(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease4_decline", env);
+    return 0;
+}
+
+int pkt4_send(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr response;
+    Pkt4Ptr query;
+    handle.getArgument("response4", response);
+    extract_response4(env, response);
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
+    /* Run script */
+    int ret;
+    ret = run_script("pkt4_send", env);
     return 0;
 }
 
