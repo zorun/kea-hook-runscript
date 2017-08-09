@@ -20,7 +20,7 @@ extern "C" {
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 {
     /* General information */
-    env.push_back("QUERY4_TYPE=" + std::to_string(query->getType()));
+    env.push_back("QUERY4_TYPE=" + std::string(query->getName()));
     /* Hardware address */
     HWAddrPtr hwaddr = query->getHWAddr();
     env.push_back("QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
@@ -33,7 +33,7 @@ void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
 {
     /* General information */
-    env.push_back("RESPONSE4_TYPE=" + std::to_string(response->getType()));
+    env.push_back("RESPONSE4_TYPE=" + std::string(response->getName()));
 }
 
 void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
