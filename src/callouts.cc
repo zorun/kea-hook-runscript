@@ -61,6 +61,20 @@ int pkt4_receive(CalloutHandle& handle) {
     return 0;
 }
 
+int pkt4_send(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt4Ptr response;
+    Pkt4Ptr query;
+    handle.getArgument("response4", response);
+    extract_response4(env, response);
+    handle.getArgument("query4", query);
+    extract_query4(env, query);
+    /* Run script */
+    int ret;
+    ret = run_script("pkt4_send", env);
+    return 0;
+}
+
 int subnet4_select(CalloutHandle& handle) {
     std::vector<std::string> env;
     Pkt4Ptr query;
@@ -143,17 +157,28 @@ int lease4_decline(CalloutHandle& handle) {
     return 0;
 }
 
-int pkt4_send(CalloutHandle& handle) {
+int lease4_expire(CalloutHandle& handle) {
     std::vector<std::string> env;
-    Pkt4Ptr response;
-    Pkt4Ptr query;
-    handle.getArgument("response4", response);
-    extract_response4(env, response);
-    handle.getArgument("query4", query);
-    extract_query4(env, query);
+    Lease4Ptr lease;
+    bool remove_lease;
+    handle.getArgument("lease4", lease);
+    extract_lease4(env, lease);
+    handle.getArgument("remove_lease", remove_lease);
+    env.push_back("REMOVE_LEASE=" + remove_lease ? "1" : "0");
     /* Run script */
     int ret;
-    ret = run_script("pkt4_send", env);
+    ret = run_script("lease4_expire", env);
+    return 0;
+}
+
+int lease4_recover(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Lease4Ptr lease;
+    handle.getArgument("lease4", lease);
+    extract_lease4(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease4_recover", env);
     return 0;
 }
 
