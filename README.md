@@ -47,7 +47,19 @@ it may be easier to just write a Kea hook yourself.
 
 ## How to use this hook
 
-Here is how to tell Kea to use this hook, for DHCPv4:
+You first need to compile the hook.  For this, you need Kea development headers
+installed.  It has been developed with Kea 1.2 but should work with later version.
+
+To build, simply run:
+
+    $ make
+
+Kea 1.2 is missing a header file, so depending on your distribution, you may need
+to manually copy `option6_pdexclude.h` from the Kea git repository to
+`/usr/include/kea/dhcp/`.
+
+If all goes well, you should obtain a `kea-hook-runscript.so` file.
+Then, here is how to tell Kea to use this hook, for DHCPv4:
 
     {
     "Dhcp4":
