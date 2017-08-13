@@ -2,6 +2,7 @@
 #include <dhcp/pkt4.h>
 #include <dhcp/dhcp6.h>
 #include <dhcp/pkt6.h>
+#include <dhcp/option6_ia.h>
 #include <dhcpsrv/subnet.h>
 #include <dhcpsrv/lease.h>
 
@@ -30,10 +31,34 @@ void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
     env.push_back("QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
 }
 
+void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
+{
+    /* General information */
+    env.push_back("QUERY6_TYPE=" + std::string(query->getName()));
+    /* TODO */
+    env.push_back("QUERY6_DUID=");
+    env.push_back("QUERY6_HWADDR=");
+    /* TODO: all options?  Only common ones?  Which format? */
+    /* TODO */
+    env.push_back("QUERY6_TEXT=" + query->toText());
+}
+
 void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
 {
     /* General information */
     env.push_back("RESPONSE4_TYPE=" + std::string(response->getName()));
+}
+
+void extract_response6(std::vector<std::string>& env, const Pkt6Ptr response)
+{
+    /* General information */
+    env.push_back("RESPONSE6_TYPE=" + std::string(response->getName()));
+    /* TODO, this may not always exist in the response */
+    env.push_back("RESPONSE6_ADDRESS=");
+    env.push_back("RESPONSE6_PREFERRED_LIFETIME=");
+    env.push_back("RESPONSE6_VALID_LIFETIME=");
+    /* TODO */
+    env.push_back("RESPONSE6_TEXT=" + response->toText());
 }
 
 void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
@@ -44,9 +69,22 @@ void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
     env.push_back("SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
 }
 
+void extract_subnet6(std::vector<std::string>& env, const Subnet6Ptr subnet)
+{
+    env.push_back("SUBNET6=" + subnet->toText());
+    std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
+    env.push_back("SUBNET6_PREFIX=" + prefix.first.toText());
+    env.push_back("SUBNET6_PREFIXLEN=" + std::to_string(prefix.second));
+}
+
 void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
 {
     env.push_back("LEASE4_ADDRESS=" + lease->addr_.toText());
+}
+
+void extract_lease6(std::vector<std::string>& env, const Lease6Ptr lease)
+{
+    env.push_back("LEASE6_ADDRESS=" + lease->addr_.toText());
 }
 
 /* IPv4 callouts */
@@ -183,5 +221,149 @@ int lease4_recover(CalloutHandle& handle) {
 }
 
 /* IPv6 callouts */
+int pkt6_receive(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    /* Run script */
+    int ret;
+    ret = run_script("pkt6_receive", env);
+    return 0;
+}
+
+int pkt6_send(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query, response;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("response6", response);
+    extract_response6(env, response);
+    /* Run script */
+    int ret;
+    ret = run_script("pkt6_send", env);
+    return 0;
+}
+
+int subnet6_select(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    Subnet6Ptr subnet;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("subnet6", subnet);
+    extract_subnet6(env, subnet);
+    /* Run script */
+    int ret;
+    ret = run_script("subnet6_select", env);
+    return 0;
+}
+
+int lease6_select(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    Subnet6Ptr subnet;
+    bool fake_allocation;
+    Lease6Ptr lease;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("subnet6", subnet);
+    extract_subnet6(env, subnet);
+    handle.getArgument("fake_allocation", fake_allocation);
+    env.push_back("FAKE_ALLOCATION=" + fake_allocation ? "1" : "0");
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_select", env);
+    return 0;
+}
+
+int lease6_renew(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    Lease6Ptr lease;
+    boost::shared_ptr<Option6IA> ia_na;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    handle.getArgument("ia_na", ia_na);
+    /* TODO */
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_renew", env);
+    return 0;
+}
+
+int lease6_rebind(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    Lease6Ptr lease;
+    boost::shared_ptr<Option6IA> ia_na;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    handle.getArgument("ia_na", ia_na);
+    /* TODO */
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_rebind", env);
+    return 0;
+}
+
+int lease6_decline(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    Lease6Ptr lease;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_decline", env);
+    return 0;
+}
+
+int lease6_release(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Pkt6Ptr query;
+    Lease6Ptr lease;
+    handle.getArgument("query6", query);
+    extract_query6(env, query);
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_release", env);
+    return 0;
+}
+
+int lease6_expire(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Lease6Ptr lease;
+    bool remove_lease;
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    handle.getArgument("remove_lease", remove_lease);
+    env.push_back("REMOVE_LEASE=" + remove_lease ? "1" : "0");
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_expire", env);
+    return 0;
+}
+
+int lease6_recover(CalloutHandle& handle) {
+    std::vector<std::string> env;
+    Lease6Ptr lease;
+    handle.getArgument("lease6", lease);
+    extract_lease6(env, lease);
+    /* Run script */
+    int ret;
+    ret = run_script("lease6_recover", env);
+    return 0;
+}
 
 } // end extern "C"
