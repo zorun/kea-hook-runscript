@@ -22,6 +22,7 @@ void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 {
     /* General information */
     env.push_back("QUERY4_TYPE=" + std::string(query->getName()));
+    env.push_back("QUERY4_INTERFACE=" + query->getIface());
     /* Hardware address */
     HWAddrPtr hwaddr = query->getHWAddr();
     env.push_back("QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
@@ -35,6 +36,7 @@ void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
 {
     /* General information */
     env.push_back("QUERY6_TYPE=" + std::string(query->getName()));
+    env.push_back("QUERY6_INTERFACE=" + query->getIface());
     /* TODO */
     env.push_back("QUERY6_DUID=");
     env.push_back("QUERY6_HWADDR=");
@@ -47,12 +49,14 @@ void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
 {
     /* General information */
     env.push_back("RESPONSE4_TYPE=" + std::string(response->getName()));
+    env.push_back("RESPONSE4_INTERFACE=" + response->getIface());
 }
 
 void extract_response6(std::vector<std::string>& env, const Pkt6Ptr response)
 {
     /* General information */
     env.push_back("RESPONSE6_TYPE=" + std::string(response->getName()));
+    env.push_back("RESPONSE6_INTERFACE=" + response->getIface());
     /* TODO, this may not always exist in the response */
     env.push_back("RESPONSE6_ADDRESS=");
     env.push_back("RESPONSE6_PREFERRED_LIFETIME=");
