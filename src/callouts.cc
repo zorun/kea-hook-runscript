@@ -18,6 +18,11 @@ extern "C" {
 
 /* These are helpers that extract relevant information from Kea data
  * structures and store them in environment variables. */
+void extract_bool(std::vector<std::string>& env, const std::string variable, bool value)
+{
+    env.push_back(variable + "=" + std::string(value ? "1" : "0"));
+}
+
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 {
     /* General information */
@@ -142,7 +147,7 @@ int lease4_select(CalloutHandle& handle) {
     handle.getArgument("subnet4", subnet);
     extract_subnet4(env, subnet);
     handle.getArgument("fake_allocation", fake_allocation);
-    env.push_back("FAKE_ALLOCATION=" + fake_allocation ? "1" : "0");
+    extract_bool(env, "FAKE_ALLOCATION", fake_allocation);
     handle.getArgument("lease4", lease);
     extract_lease4(env, lease);
     /* Run script */
@@ -206,7 +211,7 @@ int lease4_expire(CalloutHandle& handle) {
     handle.getArgument("lease4", lease);
     extract_lease4(env, lease);
     handle.getArgument("remove_lease", remove_lease);
-    env.push_back("REMOVE_LEASE=" + remove_lease ? "1" : "0");
+    extract_bool(env, "REMOVE_LEASE", remove_lease);
     /* Run script */
     int ret;
     ret = run_script("lease4_expire", env);
@@ -274,7 +279,7 @@ int lease6_select(CalloutHandle& handle) {
     handle.getArgument("subnet6", subnet);
     extract_subnet6(env, subnet);
     handle.getArgument("fake_allocation", fake_allocation);
-    env.push_back("FAKE_ALLOCATION=" + fake_allocation ? "1" : "0");
+    extract_bool(env, "FAKE_ALLOCATION", fake_allocation);
     handle.getArgument("lease6", lease);
     extract_lease6(env, lease);
     /* Run script */
@@ -352,7 +357,7 @@ int lease6_expire(CalloutHandle& handle) {
     handle.getArgument("lease6", lease);
     extract_lease6(env, lease);
     handle.getArgument("remove_lease", remove_lease);
-    env.push_back("REMOVE_LEASE=" + remove_lease ? "1" : "0");
+    extract_bool(env, "REMOVE_LEASE", remove_lease);
     /* Run script */
     int ret;
     ret = run_script("lease6_expire", env);
