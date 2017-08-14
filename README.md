@@ -97,11 +97,33 @@ is to continously display the content of this file:
 
     tail -F /tmp/kea-hook-runscript-debug.log
 
-## Information passed to the external script
+# Reference of variables passed to the external script
 
-TODO: table with environment variables passed to the script at each hook point.
+## DHCPv4 variables
 
-For now, just use the debug script or read the code.
+Here are all possible variables, with their type, description and
+reference of the possible values.  Booleans are simply expressed with `0`
+and `1`.
+
+| Variable name      | Type     | Description                           | Reference                                                                                                            |
+|--------------------+----------+---------------------------------------+----------------------------------------------------------------------------------------------------------------------|
+| `QUERY4_TYPE`      | `string` | Type of DHCP message                  | <https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016>     |
+| `QUERY4_INTERFACE` | `string` | Interface on which query was received |                                                                                                                      |
+| `QUERY4_RELAYED`   | `bool`   |                                       | <https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e> |
+
+## DHCPv4 hook points
+
+For each Kea hook point, here are all variables usable in the external
+script.
+
+### `pkt4_receive`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
 
 # TODO
 
