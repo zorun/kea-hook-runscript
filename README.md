@@ -100,7 +100,7 @@ You can use the same script for both DHCPv4 and DHCPv6, or use two different scr
 
 The script will receive the name of the hook point as first argument, and all
 relevant information available at the current hook point will be passed as
-environment variables.
+environment variables, documented below.
 
 Refer to the Kea documentation for more information about each hook point:
 
