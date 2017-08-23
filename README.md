@@ -147,7 +147,7 @@ and `1`.
 For each Kea hook point, here are all variables usable in the external
 script.
 
-### `pkt4_receive`
+### [`pkt4_receive`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksPkt4Receive)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
