@@ -156,7 +156,7 @@ script.
 - `QUERY4_HWADDR_TYPE`
 - `QUERY4_RELAYED`
 
-### `pkt4_send`
+### [`pkt4_send`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksPkt4Send)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
@@ -167,7 +167,7 @@ script.
 - `RESPONSE4_TYPE`
 - `RESPONSE4_INTERFACE`
 
-### `subnet4_select`
+### [`subnet4_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksSubnet4Select)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
@@ -179,7 +179,7 @@ script.
 - `SUBNET4_PREFIXLEN`
 - `SUBNET4`
 
-### `lease4_select`
+### [`lease4_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Select)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
@@ -193,7 +193,7 @@ script.
 - `FAKE_ALLOCATION`
 - `LEASE4_ADDRESS`
 
-### `lease4_renew`
+### [`lease4_renew`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Renew)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
@@ -206,7 +206,7 @@ script.
 - `SUBNET4`
 - `LEASE4_ADDRESS`
 
-### `lease4_release`
+### [`lease4_release`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Release)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
@@ -216,7 +216,7 @@ script.
 - `QUERY4_RELAYED`
 - `LEASE4_ADDRESS`
 
-### `lease4_decline`
+### [`lease4_decline`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Decline)
 
 - `QUERY4_TYPE`
 - `QUERY4_INTERFACE`
@@ -226,12 +226,12 @@ script.
 - `QUERY4_RELAYED`
 - `LEASE4_ADDRESS`
 
-### `lease4_expire`
+### [`lease4_expire`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)
 
 - `LEASE4_ADDRESS`
 - `REMOVE_LEASE`
 
-### `lease4_recover`
+### [`lease4_recover`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Recover)
 
 - `LEASE4_ADDRESS`
 
