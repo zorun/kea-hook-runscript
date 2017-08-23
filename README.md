@@ -68,12 +68,13 @@ To build against a local Kea source tree, assumed to be in `~/kea`:
 
 - build Kea (`cd ~/kea && make -j`)
 - install Kea to a local directory (`cd ~/kea && make install DESTDIR=/tmp/kea`)
-- build this hook with:
 
-      $ export KEA_MSG_COMPILER=~/kea/src/lib/log/compiler/kea-msg-compiler
-      $ export KEA_INCLUDE=~/kea/src/lib
-      $ export KEA_LIB=/tmp/kea/usr/local/lib
-      $ make -j
+Then build this hook with:
+
+    $ export KEA_MSG_COMPILER=~/kea/src/lib/log/compiler/kea-msg-compiler
+    $ export KEA_INCLUDE=~/kea/src/lib
+    $ export KEA_LIB=/tmp/kea/usr/local/lib
+    $ make -j
 
 ## How to use this hook
 
