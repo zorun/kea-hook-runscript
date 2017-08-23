@@ -25,7 +25,7 @@ to initialise a huge interpreter (such as Python or Ruby) will cause a large
 amount of CPU usage and a massive slowdown of Kea, because the script is run
 multiple times for each DHCP transaction.
 
-This hook works for both DHCPv4 and DHCPv6.
+This hook works for both DHCPv4 and DHCPv6, on Kea 1.1 and above.
 
 In the future, the hook will possibly feed the return code of the external script
 back into Kea.  This would allow the external script to cancel part of Kea's normal processing
@@ -45,18 +45,37 @@ this hook is well-suited:
 For more complex use-cases, including non-trivial changes to Kea's behaviour,
 it may be easier to just write a Kea hook yourself.
 
-## How to use this hook
+## How to build
 
-You first need to compile the hook.  For this, you need Kea development headers
-installed.  It has been developed with Kea 1.2 but should work with later version.
+You first need to compile the hook.  For this, you need Kea and Boost
+development headers installed: on Debian, the packages are `kea-dev` and
+`libboost-dev`.
 
 To build, simply run:
 
-    $ make
+    $ make -j
 
-Kea 1.2 is missing a header file, so depending on your distribution, you may need
-to manually copy `option6_pdexclude.h` from the Kea git repository to
-`/usr/include/kea/dhcp/`.
+Some notes on Kea versions:
+
+- Kea 1.1 does not install all required headers (most notably `dhcpsrv/`),
+  so you may need to build against Kea's source tree.
+- Kea 1.2 is missing a header file by mistake, so depending on your
+  distribution, you may need to manually copy `option6_pdexclude.h` from
+  the Kea git repository to `/usr/include/kea/dhcp/`.
+- Kea 1.3 should work out-of-the-box.
+
+To build against a local Kea source tree, assumed to be in `~/kea`:
+
+- build Kea (`cd ~/kea && make -j`)
+- install Kea to a local directory (`cd ~/kea && make install DESTDIR=/tmp/kea`)
+- build this hook with:
+
+      $ export KEA_MSG_COMPILER=~/kea/src/lib/log/compiler/kea-msg-compiler
+      $ export KEA_INCLUDE=~/kea/src/lib
+      $ export KEA_LIB=/tmp/kea/usr/local/lib
+      $ make -j
+
+## How to use this hook
 
 If all goes well, you should obtain a `kea-hook-runscript.so` file.
 Then, here is how to tell Kea to use this hook, for DHCPv4:
