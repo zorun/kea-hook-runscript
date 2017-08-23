@@ -105,11 +105,22 @@ Here are all possible variables, with their type, description and
 reference of the possible values.  Booleans are simply expressed with `0`
 and `1`.
 
-| Variable name      | Type     | Description                           | Reference                                                                                                                         |
-|--------------------|----------|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `QUERY4_TYPE`      | `string` | Type of DHCP message                  | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)    |
-| `QUERY4_INTERFACE` | `string` | Interface on which query was received |                                                                                                                                   |
-| `QUERY4_RELAYED`   | `bool`   |                                       | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e) |
+| Variable name          | Type     | Description                                                 | Reference                                                                                                                                                       |
+|------------------------+----------+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `QUERY4_TYPE`          | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
+| `QUERY4_INTERFACE`     | `string` | Interface on which query was received                       |                                                                                                                                                                 |
+| `QUERY4_RELAYED`       | `bool`   | Whether query was relayed                                   | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
+| `QUERY4_HWADDR`        | `string` | Hardware address of the client (often MAC address)          |                                                                                                                                                                 |
+| `QUERY4_HWADDR_TYPE`   | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
+| `QUERY4_HWADDR_SOURCE` | `int`    | Currently always set to `0`                                 | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d2/db9/structisc_1_1dhcp_1_1HWAddr.html)                                                            |
+| `RESPONSE4_TYPE`       | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
+| `RESPONSE4_INTERFACE`  | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
+| `SUBNET4_PREFIX`       | `IPv4`   | Address of the IP prefix (without prefix length)            |                                                                                                                                                                 |
+| `SUBNET4_PREFIXLEN`    | `int`    | Prefix length (`0` to `32`)                                 |                                                                                                                                                                 |
+| `SUBNET4`              | `string` | `SUBNET4_PREFIX`/`SUBNET4_PREFIXLEN`                        |                                                                                                                                                                 |
+| `LEASE4_ADDRESS`       | `IPv4`   | IPv4 address leased to client                               |                                                                                                                                                                 |
+| `REMOVE_LEASE`         | `bool`   | Whether the lease should be removed from the lease database | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)                                                  |
+| `FAKE_ALLOCATION`      | `bool`   | Whether the query is a DISCOVER or a REQUEST                | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLeaseSelect)                                                   |
 
 ## DHCPv4 hook points
 
@@ -125,11 +136,90 @@ script.
 - `QUERY4_HWADDR_TYPE`
 - `QUERY4_RELAYED`
 
+### `pkt4_send`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
+- `RESPONSE4_TYPE`
+- `RESPONSE4_INTERFACE`
+
+### `subnet4_select`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
+- `SUBNET4_PREFIX`
+- `SUBNET4_PREFIXLEN`
+- `SUBNET4`
+
+### `lease4_select`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
+- `SUBNET4_PREFIX`
+- `SUBNET4_PREFIXLEN`
+- `SUBNET4`
+- `FAKE_ALLOCATION`
+- `LEASE4_ADDRESS`
+
+### `lease4_renew`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
+- `SUBNET4_PREFIX`
+- `SUBNET4_PREFIXLEN`
+- `SUBNET4`
+- `LEASE4_ADDRESS`
+
+### `lease4_release`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
+- `LEASE4_ADDRESS`
+
+### `lease4_decline`
+
+- `QUERY4_TYPE`
+- `QUERY4_INTERFACE`
+- `QUERY4_HWADDR`
+- `QUERY4_HWADDR_SOURCE`
+- `QUERY4_HWADDR_TYPE`
+- `QUERY4_RELAYED`
+- `LEASE4_ADDRESS`
+
+### `lease4_expire`
+
+- `LEASE4_ADDRESS`
+- `REMOVE_LEASE`
+
+### `lease4_recover`
+
+- `LEASE4_ADDRESS`
+
+
 # TODO
 
 - handle DHCPv6 hook points better
 - also call the script at load/unload
-- document environment variables
 - allow to configure which hook points will trigger the script
 - take into account the return code of the script to set the status
   of the callout (this should be configurable to avoid surprises...).
