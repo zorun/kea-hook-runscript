@@ -1,8 +1,12 @@
 
+KEA_MSG_COMPILER ?= kea-msg-compiler
+KEA_INCLUDE ?= /usr/include/kea
+KEA_LIB ?= /usr/lib
+
 OBJECTS = src/messages.o src/logger.o src/load.o src/runscript.o src/callouts.o src/version.o
 DEPS = $(OBJECTS:.o=.d)
-CXXFLAGS = -I /usr/include/kea -fPIC -Wno-deprecated
-LDFLAGS = -L /usr/lib/kea/lib -shared -lkea-dhcpsrv -lkea-dhcp++ -lkea-hooks -lkea-log -lkea-util -lkea-exceptions
+CXXFLAGS = -I $(KEA_INCLUDE) -fPIC -Wno-deprecated
+LDFLAGS = -L $(KEA_LIB) -shared -lkea-dhcpsrv -lkea-dhcp++ -lkea-hooks -lkea-log -lkea-util -lkea-exceptions
 
 kea-hook-runscript.so: $(OBJECTS)
 	g++ -o $@ $(CXXFLAGS) $(LDFLAGS) $(OBJECTS)
@@ -13,7 +17,7 @@ kea-hook-runscript.so: $(OBJECTS)
 # Compile messages (for logging)
 src/messages.h src/messages.cc: s-messages
 s-messages: src/messages.mes
-	kea-msg-compiler -d src/ $<
+	$(KEA_MSG_COMPILER) -d src/ $<
 	touch $@
 
 clean:
