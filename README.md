@@ -57,7 +57,9 @@ inserting routes in the kernel each time a DHCP client connects, and
 sending custom routes to clients using DHCP option 121.  This is mostly
 useful to hand out public IPv4 addresses to customers.
 
-See [README](examples/slash32_leases/README.md) for more details.
+See the included [README](examples/slash32_leases/README.md) for more
+explanations and the [source](examples/slash32_leases) with the script and
+an example Kea configuration.
 
 ### Debug script
 

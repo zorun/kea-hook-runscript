@@ -1,3 +1,5 @@
+# Handing out IPv4 addresses in /32 subnets
+
 The goal of this example is to lease IPv4 addresses individually (/32 design).
 This is essentially a "out-of-subnet" reservation mode, because clients do not
 need to be in the same IP subnet as the DHCP server.  This is mostly
