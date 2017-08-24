@@ -38,12 +38,37 @@ this hook is well-suited:
 
 - add/remove routing entries when DHCP clients arrive or leave.  This can be useful
   when handing out IPv4 addressing in /32 subnets, or IPv6 Prefix Delegation
-  with DHCPv6-PD;
+  with DHCPv6-PD.  An example is included in `examples/slash32_leases/`;
 - update firewall rules to allow/refuse access to new DHCP clients;
 - log information about successful leases.
 
 For more complex use-cases, including non-trivial changes to Kea's behaviour,
 it may be easier to just write a Kea hook yourself.
+
+## Examples
+
+If you have more examples of usage, feel free to contribute your Kea
+config and your scripts!
+
+### Handing out IPv4 addresses in /32 subnets
+
+This example allows to lease IPv4 addresses individually (/32 subnets), by
+inserting routes in the kernel each time a DHCP client connects, and
+sending custom routes to clients using DHCP option 121.  This is mostly
+useful to hand out public IPv4 addresses to customers.
+
+See [README](examples/slash32_leases/README.md) for more details.
+
+### Debug script
+
+To experiment, a simple debug script is provided: `examples/debug.sh`.  It
+simply prints the name of the hook point and all environment variables
+passed to it.
+
+The output of the script is at `/tmp/kea-hook-runscript-debug.log`.  A nice way to debug
+is to continously display the content of this file:
+
+    tail -F /tmp/kea-hook-runscript-debug.log
 
 ## How to build
 
@@ -102,20 +127,12 @@ The script will receive the name of the hook point as first argument, and all
 relevant information available at the current hook point will be passed as
 environment variables, documented below.
 
+To debug, see the `examples/debug.sh` script described above.
+
 Refer to the Kea documentation for more information about each hook point:
 
 - DHCPv4 hooks reference: <https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html>
 - DHCPv6 hooks reference: <https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html>
-
-## Debug script
-
-To experiment, an example script is provided: `examples/debug.sh`.  It simply prints
-the name of the hook point and all environment variables passed to it.
-
-The output of the script is at `/tmp/kea-hook-runscript-debug.log`.  A nice way to debug
-is to continously display the content of this file:
-
-    tail -F /tmp/kea-hook-runscript-debug.log
 
 # Reference of variables passed to the external script
 
