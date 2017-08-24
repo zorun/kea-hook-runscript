@@ -26,74 +26,74 @@ void extract_bool(std::vector<std::string>& env, const std::string variable, boo
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 {
     /* General information */
-    env.push_back("QUERY4_TYPE=" + std::string(query->getName()));
-    env.push_back("QUERY4_INTERFACE=" + query->getIface());
+    env.push_back("KEA_QUERY4_TYPE=" + std::string(query->getName()));
+    env.push_back("KEA_QUERY4_INTERFACE=" + query->getIface());
     /* Hardware address */
     HWAddrPtr hwaddr = query->getHWAddr();
-    env.push_back("QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
-    env.push_back("QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
-    env.push_back("QUERY4_HWADDR=" + hwaddr->toText(false));
+    env.push_back("KEA_QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+    env.push_back("KEA_QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+    env.push_back("KEA_QUERY4_HWADDR=" + hwaddr->toText(false));
     /* Misc */
-    env.push_back("QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
+    env.push_back("KEA_QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
 }
 
 void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
 {
     /* General information */
-    env.push_back("QUERY6_TYPE=" + std::string(query->getName()));
-    env.push_back("QUERY6_INTERFACE=" + query->getIface());
+    env.push_back("KEA_QUERY6_TYPE=" + std::string(query->getName()));
+    env.push_back("KEA_QUERY6_INTERFACE=" + query->getIface());
     /* TODO */
-    env.push_back("QUERY6_DUID=");
-    env.push_back("QUERY6_HWADDR=");
+    env.push_back("KEA_QUERY6_DUID=");
+    env.push_back("KEA_QUERY6_HWADDR=");
     /* TODO: all options?  Only common ones?  Which format? */
     /* TODO */
-    env.push_back("QUERY6_TEXT=" + query->toText());
+    env.push_back("KEA_QUERY6_TEXT=" + query->toText());
 }
 
 void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
 {
     /* General information */
-    env.push_back("RESPONSE4_TYPE=" + std::string(response->getName()));
-    env.push_back("RESPONSE4_INTERFACE=" + response->getIface());
+    env.push_back("KEA_RESPONSE4_TYPE=" + std::string(response->getName()));
+    env.push_back("KEA_RESPONSE4_INTERFACE=" + response->getIface());
 }
 
 void extract_response6(std::vector<std::string>& env, const Pkt6Ptr response)
 {
     /* General information */
-    env.push_back("RESPONSE6_TYPE=" + std::string(response->getName()));
-    env.push_back("RESPONSE6_INTERFACE=" + response->getIface());
+    env.push_back("KEA_RESPONSE6_TYPE=" + std::string(response->getName()));
+    env.push_back("KEA_RESPONSE6_INTERFACE=" + response->getIface());
     /* TODO, this may not always exist in the response */
-    env.push_back("RESPONSE6_ADDRESS=");
-    env.push_back("RESPONSE6_PREFERRED_LIFETIME=");
-    env.push_back("RESPONSE6_VALID_LIFETIME=");
+    env.push_back("KEA_RESPONSE6_ADDRESS=");
+    env.push_back("KEA_RESPONSE6_PREFERRED_LIFETIME=");
+    env.push_back("KEA_RESPONSE6_VALID_LIFETIME=");
     /* TODO */
-    env.push_back("RESPONSE6_TEXT=" + response->toText());
+    env.push_back("KEA_RESPONSE6_TEXT=" + response->toText());
 }
 
 void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
 {
-    env.push_back("SUBNET4=" + subnet->toText());
+    env.push_back("KEA_SUBNET4=" + subnet->toText());
     std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
-    env.push_back("SUBNET4_PREFIX=" + prefix.first.toText());
-    env.push_back("SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
+    env.push_back("KEA_SUBNET4_PREFIX=" + prefix.first.toText());
+    env.push_back("KEA_SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
 }
 
 void extract_subnet6(std::vector<std::string>& env, const Subnet6Ptr subnet)
 {
-    env.push_back("SUBNET6=" + subnet->toText());
+    env.push_back("KEA_SUBNET6=" + subnet->toText());
     std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
-    env.push_back("SUBNET6_PREFIX=" + prefix.first.toText());
-    env.push_back("SUBNET6_PREFIXLEN=" + std::to_string(prefix.second));
+    env.push_back("KEA_SUBNET6_PREFIX=" + prefix.first.toText());
+    env.push_back("KEA_SUBNET6_PREFIXLEN=" + std::to_string(prefix.second));
 }
 
 void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
 {
-    env.push_back("LEASE4_ADDRESS=" + lease->addr_.toText());
+    env.push_back("KEA_LEASE4_ADDRESS=" + lease->addr_.toText());
 }
 
 void extract_lease6(std::vector<std::string>& env, const Lease6Ptr lease)
 {
-    env.push_back("LEASE6_ADDRESS=" + lease->addr_.toText());
+    env.push_back("KEA_LEASE6_ADDRESS=" + lease->addr_.toText());
 }
 
 /* IPv4 callouts */
@@ -147,7 +147,7 @@ int lease4_select(CalloutHandle& handle) {
     handle.getArgument("subnet4", subnet);
     extract_subnet4(env, subnet);
     handle.getArgument("fake_allocation", fake_allocation);
-    extract_bool(env, "FAKE_ALLOCATION", fake_allocation);
+    extract_bool(env, "KEA_FAKE_ALLOCATION", fake_allocation);
     handle.getArgument("lease4", lease);
     extract_lease4(env, lease);
     /* Run script */
@@ -211,7 +211,7 @@ int lease4_expire(CalloutHandle& handle) {
     handle.getArgument("lease4", lease);
     extract_lease4(env, lease);
     handle.getArgument("remove_lease", remove_lease);
-    extract_bool(env, "REMOVE_LEASE", remove_lease);
+    extract_bool(env, "KEA_REMOVE_LEASE", remove_lease);
     /* Run script */
     int ret;
     ret = run_script("lease4_expire", env);
@@ -279,7 +279,7 @@ int lease6_select(CalloutHandle& handle) {
     handle.getArgument("subnet6", subnet);
     extract_subnet6(env, subnet);
     handle.getArgument("fake_allocation", fake_allocation);
-    extract_bool(env, "FAKE_ALLOCATION", fake_allocation);
+    extract_bool(env, "KEA_FAKE_ALLOCATION", fake_allocation);
     handle.getArgument("lease6", lease);
     extract_lease6(env, lease);
     /* Run script */
@@ -357,7 +357,7 @@ int lease6_expire(CalloutHandle& handle) {
     handle.getArgument("lease6", lease);
     extract_lease6(env, lease);
     handle.getArgument("remove_lease", remove_lease);
-    extract_bool(env, "REMOVE_LEASE", remove_lease);
+    extract_bool(env, "KEA_REMOVE_LEASE", remove_lease);
     /* Run script */
     int ret;
     ret = run_script("lease6_expire", env);

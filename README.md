@@ -125,22 +125,22 @@ Here are all possible variables for DHCPv4, with their type, description
 and reference of the possible values.  Booleans are simply expressed with
 `0` and `1`.
 
-| Variable name          | Type     | Description                                                 | Reference                                                                                                                                                       |
-|------------------------|----------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `QUERY4_TYPE`          | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
-| `QUERY4_INTERFACE`     | `string` | Interface on which query was received                       |                                                                                                                                                                 |
-| `QUERY4_RELAYED`       | `bool`   | Whether query was relayed                                   | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
-| `QUERY4_HWADDR`        | `string` | Hardware address of the client (often MAC address)          |                                                                                                                                                                 |
-| `QUERY4_HWADDR_TYPE`   | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
-| `QUERY4_HWADDR_SOURCE` | `int`    | Currently always set to `0`                                 | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d2/db9/structisc_1_1dhcp_1_1HWAddr.html)                                                            |
-| `RESPONSE4_TYPE`       | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
-| `RESPONSE4_INTERFACE`  | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
-| `SUBNET4_PREFIX`       | `IPv4`   | IP prefix of the subnet (without prefix length)             |                                                                                                                                                                 |
-| `SUBNET4_PREFIXLEN`    | `int`    | Prefix length of the subnet (`0` to `32`)                   |                                                                                                                                                                 |
-| `SUBNET4`              | `string` | `SUBNET4_PREFIX`/`SUBNET4_PREFIXLEN`                        |                                                                                                                                                                 |
-| `LEASE4_ADDRESS`       | `IPv4`   | IPv4 address leased to client                               |                                                                                                                                                                 |
-| `REMOVE_LEASE`         | `bool`   | Whether the lease should be removed from the lease database | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)                                                  |
-| `FAKE_ALLOCATION`      | `bool`   | Whether the query is a DISCOVER or a REQUEST                | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLeaseSelect)                                                   |
+| Variable name              | Type     | Description                                                 | Reference                                                                                                                                                       |
+|----------------------------|----------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `KEA_QUERY4_TYPE`          | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
+| `KEA_QUERY4_INTERFACE`     | `string` | Interface on which query was received                       |                                                                                                                                                                 |
+| `KEA_QUERY4_RELAYED`       | `bool`   | Whether query was relayed                                   | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
+| `KEA_QUERY4_HWADDR`        | `string` | Hardware address of the client (often MAC address)          |                                                                                                                                                                 |
+| `KEA_QUERY4_HWADDR_TYPE`   | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
+| `KEA_QUERY4_HWADDR_SOURCE` | `int`    | Currently always set to `0`                                 | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d2/db9/structisc_1_1dhcp_1_1HWAddr.html)                                                            |
+| `KEA_RESPONSE4_TYPE`       | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
+| `KEA_RESPONSE4_INTERFACE`  | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
+| `KEA_SUBNET4_PREFIX`       | `IPv4`   | IP prefix of the subnet (without prefix length)             |                                                                                                                                                                 |
+| `KEA_SUBNET4_PREFIXLEN`    | `int`    | Prefix length of the subnet (`0` to `32`)                   |                                                                                                                                                                 |
+| `KEA_SUBNET4`              | `string` | `KEA_SUBNET4_PREFIX`/`KEA_SUBNET4_PREFIXLEN`                |                                                                                                                                                                 |
+| `KEA_LEASE4_ADDRESS`       | `IPv4`   | IPv4 address leased to client                               |                                                                                                                                                                 |
+| `KEA_REMOVE_LEASE`         | `bool`   | Whether the lease should be removed from the lease database | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)                                                  |
+| `KEA_FAKE_ALLOCATION`      | `bool`   | Whether the query is a DISCOVER or a REQUEST                | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLeaseSelect)                                                   |
 
 ## DHCPv4 hook points
 
@@ -149,91 +149,91 @@ script.
 
 ### [`pkt4_receive`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksPkt4Receive)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
 
 ### [`pkt4_send`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksPkt4Send)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
-- `RESPONSE4_TYPE`
-- `RESPONSE4_INTERFACE`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
+- `KEA_RESPONSE4_TYPE`
+- `KEA_RESPONSE4_INTERFACE`
 
 ### [`subnet4_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksSubnet4Select)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
-- `SUBNET4_PREFIX`
-- `SUBNET4_PREFIXLEN`
-- `SUBNET4`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
+- `KEA_SUBNET4_PREFIX`
+- `KEA_SUBNET4_PREFIXLEN`
+- `KEA_SUBNET4`
 
 ### [`lease4_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Select)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
-- `SUBNET4_PREFIX`
-- `SUBNET4_PREFIXLEN`
-- `SUBNET4`
-- `FAKE_ALLOCATION`
-- `LEASE4_ADDRESS`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
+- `KEA_SUBNET4_PREFIX`
+- `KEA_SUBNET4_PREFIXLEN`
+- `KEA_SUBNET4`
+- `KEA_FAKE_ALLOCATION`
+- `KEA_LEASE4_ADDRESS`
 
 ### [`lease4_renew`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Renew)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
-- `SUBNET4_PREFIX`
-- `SUBNET4_PREFIXLEN`
-- `SUBNET4`
-- `LEASE4_ADDRESS`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
+- `KEA_SUBNET4_PREFIX`
+- `KEA_SUBNET4_PREFIXLEN`
+- `KEA_SUBNET4`
+- `KEA_LEASE4_ADDRESS`
 
 ### [`lease4_release`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Release)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
-- `LEASE4_ADDRESS`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
+- `KEA_LEASE4_ADDRESS`
 
 ### [`lease4_decline`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Decline)
 
-- `QUERY4_TYPE`
-- `QUERY4_INTERFACE`
-- `QUERY4_HWADDR`
-- `QUERY4_HWADDR_SOURCE`
-- `QUERY4_HWADDR_TYPE`
-- `QUERY4_RELAYED`
-- `LEASE4_ADDRESS`
+- `KEA_QUERY4_TYPE`
+- `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_HWADDR`
+- `KEA_QUERY4_HWADDR_SOURCE`
+- `KEA_QUERY4_HWADDR_TYPE`
+- `KEA_QUERY4_RELAYED`
+- `KEA_LEASE4_ADDRESS`
 
 ### [`lease4_expire`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)
 
-- `LEASE4_ADDRESS`
-- `REMOVE_LEASE`
+- `KEA_LEASE4_ADDRESS`
+- `KEA_REMOVE_LEASE`
 
 ### [`lease4_recover`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Recover)
 
-- `LEASE4_ADDRESS`
+- `KEA_LEASE4_ADDRESS`
 
 
 ## DHCPv6 variables
@@ -242,23 +242,23 @@ Here are all possible variables for DHCPv6, with their type, description
 and reference of the possible values.  Booleans are simply expressed with
 `0` and `1`.
 
-| Variable name                  | Type     | Description                                                 | Reference                                                                                                      |
-|--------------------------------|----------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------- |
-| `QUERY6_TYPE`                  | `string` | Type of DHCPv6 message                                      | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                        |
-| `QUERY6_INTERFACE`             | `string` | Interface on which query was received                       |                                                                                                                |
-| `QUERY6_DUID`                  | `string` | TODO                                                        |                                                                                                                |
-| `QUERY6_HWADDR`                | `string` | TODO                                                        |                                                                                                                |
-| `RESPONSE6_TYPE`               | `string` | Type of DHCPv6 message                                      | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                        |
-| `RESPONSE6_INTERFACE`          | `string` | Interface on which response is being sent                   |                                                                                                                |
-| `RESPONSE6_ADDRESS`            | `string` | TODO                                                        |                                                                                                                |
-| `RESPONSE6_PREFERRED_LIFETIME` | `int`    | TODO                                                        |                                                                                                                |
-| `RESPONSE6_VALID_LIFETIME`     | `int`    | TODO                                                        |                                                                                                                |
-| `SUBNET6_PREFIX`               | `IPv6`   | IP prefix of the subnet (without prefix length)             |                                                                                                                |
-| `SUBNET6_PREFIXLEN`            | `int`    | Prefix length of the subnet (`0` to `128`)                  |                                                                                                                |
-| `SUBNET6`                      | `string` | `SUBNET6_PREFIX`/`SUBNET6_PREFIXLEN`                        |                                                                                                                |
-| `LEASE6_ADDRESS`               | `IPv6`   | IPv6 address leased to client                               |                                                                                                                |
-| `REMOVE_LEASE`                 | `bool`   | Whether the lease should be removed from the lease database | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Expire) |
-| `FAKE_ALLOCATION`              | `bool`   | Whether the query is a SOLICIT or a REQUEST                 | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Select) |
+| Variable name                      | Type     | Description                                                 | Reference                                                                                                      |
+|------------------------------------|----------|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `KEA_QUERY6_TYPE`                  | `string` | Type of DHCPv6 message                                      | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                        |
+| `KEA_QUERY6_INTERFACE`             | `string` | Interface on which query was received                       |                                                                                                                |
+| `KEA_QUERY6_DUID`                  | `string` | TODO                                                        |                                                                                                                |
+| `KEA_QUERY6_HWADDR`                | `string` | TODO                                                        |                                                                                                                |
+| `KEA_RESPONSE6_TYPE`               | `string` | Type of DHCPv6 message                                      | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                        |
+| `KEA_RESPONSE6_INTERFACE`          | `string` | Interface on which response is being sent                   |                                                                                                                |
+| `KEA_RESPONSE6_ADDRESS`            | `string` | TODO                                                        |                                                                                                                |
+| `KEA_RESPONSE6_PREFERRED_LIFETIME` | `int`    | TODO                                                        |                                                                                                                |
+| `KEA_RESPONSE6_VALID_LIFETIME`     | `int`    | TODO                                                        |                                                                                                                |
+| `KEA_SUBNET6_PREFIX`               | `IPv6`   | IP prefix of the subnet (without prefix length)             |                                                                                                                |
+| `KEA_SUBNET6_PREFIXLEN`            | `int`    | Prefix length of the subnet (`0` to `128`)                  |                                                                                                                |
+| `KEA_SUBNET6`                      | `string` | `KEA_SUBNET6_PREFIX`/`KEA_SUBNET6_PREFIXLEN`                |                                                                                                                |
+| `KEA_LEASE6_ADDRESS`               | `IPv6`   | IPv6 address leased to client                               |                                                                                                                |
+| `KEA_REMOVE_LEASE`                 | `bool`   | Whether the lease should be removed from the lease database | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Expire) |
+| `KEA_FAKE_ALLOCATION`              | `bool`   | Whether the query is a SOLICIT or a REQUEST                 | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Select) |
 
 ## DHCPv6 hook points
 
@@ -267,85 +267,85 @@ script.
 
 ### [`pkt6_receive`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksPkt6Receive)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
 
 ### [`pkt6_send`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksPkt6Send)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `RESPONSE6_TYPE`
-- `RESPONSE6_INTERFACE`
-- `RESPONSE6_ADDRESS`
-- `RESPONSE6_PREFERRED_LIFETIME`
-- `RESPONSE6_VALID_LIFETIME`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_RESPONSE6_TYPE`
+- `KEA_RESPONSE6_INTERFACE`
+- `KEA_RESPONSE6_ADDRESS`
+- `KEA_RESPONSE6_PREFERRED_LIFETIME`
+- `KEA_RESPONSE6_VALID_LIFETIME`
 
 ### [`subnet6_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksSubnet6Select)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `SUBNET6_PREFIX`
-- `SUBNET6_PREFIXLEN`
-- `SUBNET6`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_SUBNET6_PREFIX`
+- `KEA_SUBNET6_PREFIXLEN`
+- `KEA_SUBNET6`
 
 ### [`lease6_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Select)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `SUBNET6_PREFIX`
-- `SUBNET6_PREFIXLEN`
-- `SUBNET6`
-- `FAKE_ALLOCATION`
-- `LEASE6_ADDRESS`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_SUBNET6_PREFIX`
+- `KEA_SUBNET6_PREFIXLEN`
+- `KEA_SUBNET6`
+- `KEA_FAKE_ALLOCATION`
+- `KEA_LEASE6_ADDRESS`
 
 ### [`lease6_renew`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Renew)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `LEASE6_ADDRESS`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_LEASE6_ADDRESS`
 
 ### [`lease6_rebind`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Rebind)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `LEASE6_ADDRESS`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_LEASE6_ADDRESS`
 
 ### [`lease6_decline`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Decline)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `LEASE6_ADDRESS`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_LEASE6_ADDRESS`
 
 ### [`lease6_release`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Release)
 
-- `QUERY6_TYPE`
-- `QUERY6_INTERFACE`
-- `QUERY6_DUID`
-- `QUERY6_HWADDR`
-- `LEASE6_ADDRESS`
+- `KEA_QUERY6_TYPE`
+- `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_DUID`
+- `KEA_QUERY6_HWADDR`
+- `KEA_LEASE6_ADDRESS`
 
 ### [`lease6_expire`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Expire)
 
-- `LEASE6_ADDRESS`
-- `REMOVE_LEASE`
+- `KEA_LEASE6_ADDRESS`
+- `KEA_REMOVE_LEASE`
 
 ### [`lease6_recover`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Recover)
 
-- `LEASE6_ADDRESS`
+- `KEA_LEASE6_ADDRESS`
 
 
 # TODO
