@@ -350,6 +350,7 @@ script.
 
 # TODO
 
+- take stdout/stderr of script and turn it into proper Kea logs
 - handle DHCPv6 hook points better
 - also call the script at load/unload
 - allow to configure which hook points will trigger the script
