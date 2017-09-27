@@ -74,7 +74,8 @@ void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
 {
     env.push_back("KEA_SUBNET4=" + subnet->toText());
     std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
-    env.push_back("KEA_SUBNET4_PREFIX=" + prefix.first.toText());
+    /* Copy string to avoid use-after-free when we return from this function */
+    env.push_back("KEA_SUBNET4_PREFIX=" + std::string(prefix.first.toText()));
     env.push_back("KEA_SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
 }
 
@@ -82,7 +83,8 @@ void extract_subnet6(std::vector<std::string>& env, const Subnet6Ptr subnet)
 {
     env.push_back("KEA_SUBNET6=" + subnet->toText());
     std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
-    env.push_back("KEA_SUBNET6_PREFIX=" + prefix.first.toText());
+    /* Copy string to avoid use-after-free when we return from this function */
+    env.push_back("KEA_SUBNET6_PREFIX=" + std::string(prefix.first.toText()));
     env.push_back("KEA_SUBNET6_PREFIXLEN=" + std::to_string(prefix.second));
 }
 
