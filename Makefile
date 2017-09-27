@@ -9,10 +9,10 @@ CXXFLAGS = -I $(KEA_INCLUDE) -fPIC -Wno-deprecated
 LDFLAGS = -L $(KEA_LIB) -shared -lkea-dhcpsrv -lkea-dhcp++ -lkea-hooks -lkea-log -lkea-util -lkea-exceptions
 
 kea-hook-runscript.so: $(OBJECTS)
-	g++ -o $@ $(CXXFLAGS) $(LDFLAGS) $(OBJECTS)
+	$(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) $(OBJECTS)
 
 %.o: %.cc
-	g++ -MMD -MP -c $(CXXFLAGS) -o $@ $<
+	$(CXX) -MMD -MP -c $(CXXFLAGS) -o $@ $<
 
 # Compile messages (for logging)
 src/messages.h src/messages.cc: s-messages
