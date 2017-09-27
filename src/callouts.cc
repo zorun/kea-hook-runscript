@@ -47,7 +47,7 @@ void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
     env.push_back("KEA_QUERY6_HWADDR=");
     /* TODO: all options?  Only common ones?  Which format? */
     /* TODO */
-    env.push_back("KEA_QUERY6_TEXT=" + query->toText());
+    env.push_back("KEA_QUERY6_DEBUG=" + query->toText());
 }
 
 void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
@@ -67,7 +67,7 @@ void extract_response6(std::vector<std::string>& env, const Pkt6Ptr response)
     env.push_back("KEA_RESPONSE6_PREFERRED_LIFETIME=");
     env.push_back("KEA_RESPONSE6_VALID_LIFETIME=");
     /* TODO */
-    env.push_back("KEA_RESPONSE6_TEXT=" + response->toText());
+    env.push_back("KEA_RESPONSE6_DEBUG=" + response->toText());
 }
 
 void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
