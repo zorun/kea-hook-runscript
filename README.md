@@ -80,7 +80,7 @@ development headers installed: on Debian, the packages are `kea-dev` and
 
 To build, simply run:
 
-    $ make -j
+    $ make
 
 Some notes on Kea versions:
 
@@ -101,7 +101,7 @@ Then build this hook with:
     $ export KEA_MSG_COMPILER=~/kea/src/lib/log/compiler/kea-msg-compiler
     $ export KEA_INCLUDE=~/kea/src/lib
     $ export KEA_LIB=/tmp/kea/usr/local/lib
-    $ make -j
+    $ make
 
 ## How to use this hook
 
