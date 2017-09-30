@@ -39,6 +39,7 @@ void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
     env.push_back("KEA_QUERY4_YIADDR=" + query->getYiaddr().toText());
     env.push_back("KEA_QUERY4_GIADDR=" + query->getGiaddr().toText());
     env.push_back("KEA_QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
+    env.push_back("KEA_QUERY4_RELAY_HOPS=" + std::to_string(query->getHops()));
 }
 
 void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
