@@ -42,9 +42,16 @@ void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
     /* General information */
     env.push_back("KEA_QUERY6_TYPE=" + std::string(query->getName()));
     env.push_back("KEA_QUERY6_INTERFACE=" + query->getIface());
+    env.push_back("KEA_QUERY6_IFINDEX=" + std::to_string(query->getIndex()));
+    env.push_back("KEA_QUERY6_HWADDR=" + query->getMAC(HWAddr::HWADDR_SOURCE_ANY)->toText(false));
+    env.push_back("KEA_QUERY6_LOCAL_ADDRESS=" + query->getLocalAddr().toText());
+    env.push_back("KEA_QUERY6_LOCAL_PORT=" + std::to_string(query->getLocalPort()));
+    env.push_back("KEA_QUERY6_REMOTE_ADDRESS=" + query->getRemoteAddr().toText());
+    env.push_back("KEA_QUERY6_REMOTE_PORT=" + std::to_string(query->getRemotePort()));
+    env.push_back("KEA_QUERY6_LABEL=" + query->getLabel());
+    env.push_back("KEA_QUERY6_TRANSACTION_ID=" + std::to_string(query->getTransid()));
     /* TODO */
     env.push_back("KEA_QUERY6_DUID=");
-    env.push_back("KEA_QUERY6_HWADDR=");
     /* TODO: all options?  Only common ones?  Which format? */
     /* TODO */
     env.push_back("KEA_QUERY6_DEBUG=" + query->toText());
