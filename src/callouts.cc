@@ -295,12 +295,19 @@ int lease6_renew(CalloutHandle& handle) {
     Pkt6Ptr query;
     Lease6Ptr lease;
     boost::shared_ptr<Option6IA> ia_na;
+    boost::shared_ptr<Option6IA> ia_pd;
     handle.getArgument("query6", query);
     extract_query6(env, query);
     handle.getArgument("lease6", lease);
     extract_lease6(env, lease);
-    handle.getArgument("ia_na", ia_na);
-    /* TODO */
+    try {
+        handle.getArgument("ia_na", ia_na);
+        /* TODO: use ia_na */
+    } catch (const NoSuchArgument&) { }
+    try {
+        handle.getArgument("ia_pd", ia_pd);
+        /* TODO: use ia_pd */
+    } catch (const NoSuchArgument&) { }
     /* Run script */
     int ret;
     ret = run_script("lease6_renew", env);
@@ -312,12 +319,19 @@ int lease6_rebind(CalloutHandle& handle) {
     Pkt6Ptr query;
     Lease6Ptr lease;
     boost::shared_ptr<Option6IA> ia_na;
+    boost::shared_ptr<Option6IA> ia_pd;
     handle.getArgument("query6", query);
     extract_query6(env, query);
     handle.getArgument("lease6", lease);
     extract_lease6(env, lease);
-    handle.getArgument("ia_na", ia_na);
-    /* TODO */
+    try {
+        handle.getArgument("ia_na", ia_na);
+        /* TODO: use ia_na */
+    } catch (const NoSuchArgument&) { }
+    try {
+        handle.getArgument("ia_pd", ia_pd);
+        /* TODO: use ia_pd */
+    } catch (const NoSuchArgument&) { }
     /* Run script */
     int ret;
     ret = run_script("lease6_rebind", env);
