@@ -29,10 +29,16 @@ void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
     env.push_back("KEA_QUERY4_TYPE=" + std::string(query->getName()));
     env.push_back("KEA_QUERY4_INTERFACE=" + query->getIface());
     /* Hardware address */
-    HWAddrPtr hwaddr = query->getHWAddr();
-    env.push_back("KEA_QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
-    env.push_back("KEA_QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
-    env.push_back("KEA_QUERY4_HWADDR=" + hwaddr->toText(false));
+    HWAddrPtr hwaddr = query->getMAC(HWAddr::HWADDR_SOURCE_ANY);
+    if (hwaddr) {
+        env.push_back("KEA_QUERY4_HWADDR=" + hwaddr->toText(false));
+        env.push_back("KEA_QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+        env.push_back("KEA_QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+    } else {
+        env.push_back("KEA_QUERY4_HWADDR=");
+        env.push_back("KEA_QUERY4_HWADDR_TYPE=");
+        env.push_back("KEA_QUERY4_HWADDR_SOURCE=");
+    }
     /* Misc */
     env.push_back("KEA_QUERY4_CIADDR=" + query->getCiaddr().toText());
     env.push_back("KEA_QUERY4_SIADDR=" + query->getSiaddr().toText());
