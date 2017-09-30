@@ -43,7 +43,16 @@ void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
     env.push_back("KEA_QUERY6_TYPE=" + std::string(query->getName()));
     env.push_back("KEA_QUERY6_INTERFACE=" + query->getIface());
     env.push_back("KEA_QUERY6_IFINDEX=" + std::to_string(query->getIndex()));
-    env.push_back("KEA_QUERY6_HWADDR=" + query->getMAC(HWAddr::HWADDR_SOURCE_ANY)->toText(false));
+    HWAddrPtr hwaddr = query->getMAC(HWAddr::HWADDR_SOURCE_ANY);
+    if (hwaddr) {
+        env.push_back("KEA_QUERY6_HWADDR=" + hwaddr->toText(false));
+        env.push_back("KEA_QUERY6_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+        env.push_back("KEA_QUERY6_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+    } else {
+        env.push_back("KEA_QUERY6_HWADDR=");
+        env.push_back("KEA_QUERY6_HWADDR_TYPE=");
+        env.push_back("KEA_QUERY6_HWADDR_SOURCE=");
+    }
     env.push_back("KEA_QUERY6_LOCAL_ADDRESS=" + query->getLocalAddr().toText());
     env.push_back("KEA_QUERY6_LOCAL_PORT=" + std::to_string(query->getLocalPort()));
     env.push_back("KEA_QUERY6_REMOTE_ADDRESS=" + query->getRemoteAddr().toText());
