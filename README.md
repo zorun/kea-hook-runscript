@@ -370,8 +370,18 @@ script.
 # TODO
 
 - take stdout/stderr of script and turn it into proper Kea logs
-- handle DHCPv6 hook points better
+- agree on a consistent terminology:
+  - should a "prefix" variable contain the prefixlen (2001:db8::/48) or just the base address (2001:db8::)?
 - also call the script at load/unload
+- figure out how to call several scripts (loading the hook multiple times doesn't seem to work)
 - allow to configure which hook points will trigger the script
 - take into account the return code of the script to set the status
   of the callout (this should be configurable to avoid surprises...).
+
+Some bugs to investigate/fix in Kea:
+
+- `lease6_select` is called twice (once with `IA_NA` and once with `IA_PD`), but
+  other functions (`lease6_renew`, `lease6_release`, `lease6_expire`) are only
+  called with `IA_PD`.
+- when an address reservation is changed for a given client, `lease6_expire` is never
+  called for the old address.
