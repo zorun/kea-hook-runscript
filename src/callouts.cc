@@ -88,7 +88,16 @@ void extract_subnet6(std::vector<std::string>& env, const Subnet6Ptr subnet)
 
 void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
 {
+    env.push_back("KEA_LEASE4_TYPE=V4");
+    env.push_back("KEA_LEASE4_STATE=" + lease->basicStatesToText(lease->state_));
+    extract_bool(env, "KEA_LEASE4_IS_EXPIRED", lease->expired());
     env.push_back("KEA_LEASE4_ADDRESS=" + lease->addr_.toText());
+    env.push_back("KEA_LEASE4_HWADDR=" + lease->hwaddr_->toText(false));
+    env.push_back("KEA_LEASE4_HOSTNAME=" + lease->hostname_);
+    env.push_back("KEA_LEASE4_CLIENT_LAST_TRANSMISSION=" + std::to_string(lease->cltt_));
+    env.push_back("KEA_LEASE4_RENEW_TIMER=" + std::to_string(lease->t1_));
+    env.push_back("KEA_LEASE4_REBIND_TIMER=" + std::to_string(lease->t2_));
+    env.push_back("KEA_LEASE4_VALID_LIFETIME=" + std::to_string(lease->valid_lft_));
     env.push_back("KEA_LEASE4_DEBUG=" + lease->toText());
 }
 
