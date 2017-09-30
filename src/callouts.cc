@@ -34,6 +34,10 @@ void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
     env.push_back("KEA_QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
     env.push_back("KEA_QUERY4_HWADDR=" + hwaddr->toText(false));
     /* Misc */
+    env.push_back("KEA_QUERY4_CIADDR=" + query->getCiaddr().toText());
+    env.push_back("KEA_QUERY4_SIADDR=" + query->getSiaddr().toText());
+    env.push_back("KEA_QUERY4_YIADDR=" + query->getYiaddr().toText());
+    env.push_back("KEA_QUERY4_GIADDR=" + query->getGiaddr().toText());
     env.push_back("KEA_QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
 }
 
