@@ -91,11 +91,13 @@ void extract_subnet6(std::vector<std::string>& env, const Subnet6Ptr subnet)
 void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
 {
     env.push_back("KEA_LEASE4_ADDRESS=" + lease->addr_.toText());
+    env.push_back("KEA_LEASE4_DEBUG=" + lease->toText());
 }
 
 void extract_lease6(std::vector<std::string>& env, const Lease6Ptr lease)
 {
     env.push_back("KEA_LEASE6_ADDRESS=" + lease->addr_.toText());
+    env.push_back("KEA_LEASE6_DEBUG=" + lease->toText());
 }
 
 /* IPv4 callouts */
