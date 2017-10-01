@@ -23,78 +23,84 @@ void extract_bool(std::vector<std::string>& env, const std::string variable, boo
     env.push_back(variable + "=" + std::string(value ? "1" : "0"));
 }
 
-void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
+/* Extract information from a DHCPv4 packet (query received, or response
+ * about to be sent) */
+void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, const Pkt4Ptr pkt4)
 {
     /* General information */
-    env.push_back("KEA_QUERY4_TYPE=" + std::string(query->getName()));
-    env.push_back("KEA_QUERY4_INTERFACE=" + query->getIface());
+    env.push_back(envprefix + "TYPE=" + std::string(pkt4->getName()));
+    env.push_back(envprefix + "INTERFACE=" + pkt4->getIface());
     /* Hardware address */
-    HWAddrPtr hwaddr = query->getMAC(HWAddr::HWADDR_SOURCE_ANY);
+    HWAddrPtr hwaddr = pkt4->getMAC(HWAddr::HWADDR_SOURCE_ANY);
     if (hwaddr) {
-        env.push_back("KEA_QUERY4_HWADDR=" + hwaddr->toText(false));
-        env.push_back("KEA_QUERY4_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
-        env.push_back("KEA_QUERY4_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+        env.push_back(envprefix + "HWADDR=" + hwaddr->toText(false));
+        env.push_back(envprefix + "HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+        env.push_back(envprefix + "HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
     } else {
-        env.push_back("KEA_QUERY4_HWADDR=");
-        env.push_back("KEA_QUERY4_HWADDR_TYPE=");
-        env.push_back("KEA_QUERY4_HWADDR_SOURCE=");
+        env.push_back(envprefix + "HWADDR=");
+        env.push_back(envprefix + "HWADDR_TYPE=");
+        env.push_back(envprefix + "HWADDR_SOURCE=");
     }
     /* Misc */
-    env.push_back("KEA_QUERY4_CIADDR=" + query->getCiaddr().toText());
-    env.push_back("KEA_QUERY4_SIADDR=" + query->getSiaddr().toText());
-    env.push_back("KEA_QUERY4_YIADDR=" + query->getYiaddr().toText());
-    env.push_back("KEA_QUERY4_GIADDR=" + query->getGiaddr().toText());
-    env.push_back("KEA_QUERY4_RELAYED=" + std::to_string(query->isRelayed()));
-    env.push_back("KEA_QUERY4_RELAY_HOPS=" + std::to_string(query->getHops()));
+    env.push_back(envprefix + "CIADDR=" + pkt4->getCiaddr().toText());
+    env.push_back(envprefix + "SIADDR=" + pkt4->getSiaddr().toText());
+    env.push_back(envprefix + "YIADDR=" + pkt4->getYiaddr().toText());
+    env.push_back(envprefix + "GIADDR=" + pkt4->getGiaddr().toText());
+    env.push_back(envprefix + "RELAYED=" + std::to_string(pkt4->isRelayed()));
+    env.push_back(envprefix + "RELAY_HOPS=" + std::to_string(pkt4->getHops()));
+
 }
 
-void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
+void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
 {
-    /* General information */
-    env.push_back("KEA_QUERY6_TYPE=" + std::string(query->getName()));
-    env.push_back("KEA_QUERY6_INTERFACE=" + query->getIface());
-    env.push_back("KEA_QUERY6_IFINDEX=" + std::to_string(query->getIndex()));
-    HWAddrPtr hwaddr = query->getMAC(HWAddr::HWADDR_SOURCE_ANY);
-    if (hwaddr) {
-        env.push_back("KEA_QUERY6_HWADDR=" + hwaddr->toText(false));
-        env.push_back("KEA_QUERY6_HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
-        env.push_back("KEA_QUERY6_HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
-    } else {
-        env.push_back("KEA_QUERY6_HWADDR=");
-        env.push_back("KEA_QUERY6_HWADDR_TYPE=");
-        env.push_back("KEA_QUERY6_HWADDR_SOURCE=");
-    }
-    env.push_back("KEA_QUERY6_LOCAL_ADDRESS=" + query->getLocalAddr().toText());
-    env.push_back("KEA_QUERY6_LOCAL_PORT=" + std::to_string(query->getLocalPort()));
-    env.push_back("KEA_QUERY6_REMOTE_ADDRESS=" + query->getRemoteAddr().toText());
-    env.push_back("KEA_QUERY6_REMOTE_PORT=" + std::to_string(query->getRemotePort()));
-    env.push_back("KEA_QUERY6_LABEL=" + query->getLabel());
-    env.push_back("KEA_QUERY6_TRANSACTION_ID=" + std::to_string(query->getTransid()));
-    /* TODO */
-    env.push_back("KEA_QUERY6_DUID=");
-    /* TODO: all options?  Only common ones?  Which format? */
-    /* TODO */
-    env.push_back("KEA_QUERY6_DEBUG=" + query->toText());
+    extract_pkt4(env, "KEA_QUERY4_", query);
 }
 
 void extract_response4(std::vector<std::string>& env, const Pkt4Ptr response)
 {
-    /* General information */
-    env.push_back("KEA_RESPONSE4_TYPE=" + std::string(response->getName()));
-    env.push_back("KEA_RESPONSE4_INTERFACE=" + response->getIface());
+    extract_pkt4(env, "KEA_RESPONSE4_", response);
 }
+
+/* Extract information from a DHCPv6 packet (query received, or response
+ * about to be sent) */
+void extract_pkt6(std::vector<std::string>& env, const std::string envprefix, const Pkt6Ptr pkt6)
+{
+    /* General information */
+    env.push_back(envprefix + "TYPE=" + std::string(pkt6->getName()));
+    env.push_back(envprefix + "INTERFACE=" + pkt6->getIface());
+    env.push_back(envprefix + "IFINDEX=" + std::to_string(pkt6->getIndex()));
+    HWAddrPtr hwaddr = pkt6->getMAC(HWAddr::HWADDR_SOURCE_ANY);
+    if (hwaddr) {
+        env.push_back(envprefix + "HWADDR=" + hwaddr->toText(false));
+        env.push_back(envprefix + "HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
+        env.push_back(envprefix + "HWADDR_SOURCE=" + std::to_string(hwaddr->source_));
+    } else {
+        env.push_back(envprefix + "HWADDR=");
+        env.push_back(envprefix + "HWADDR_TYPE=");
+        env.push_back(envprefix + "HWADDR_SOURCE=");
+    }
+    env.push_back(envprefix + "LOCAL_ADDRESS=" + pkt6->getLocalAddr().toText());
+    env.push_back(envprefix + "LOCAL_PORT=" + std::to_string(pkt6->getLocalPort()));
+    env.push_back(envprefix + "REMOTE_ADDRESS=" + pkt6->getRemoteAddr().toText());
+    env.push_back(envprefix + "REMOTE_PORT=" + std::to_string(pkt6->getRemotePort()));
+    env.push_back(envprefix + "LABEL=" + pkt6->getLabel());
+    env.push_back(envprefix + "TRANSACTION_ID=" + std::to_string(pkt6->getTransid()));
+    /* TODO */
+    env.push_back(envprefix + "DUID=");
+    /* TODO: all options?  Only common ones?  Which format? */
+    /* TODO */
+    env.push_back(envprefix + "DEBUG=" + pkt6->toText());
+}
+
+void extract_query6(std::vector<std::string>& env, const Pkt6Ptr query)
+{
+    extract_pkt6(env, "KEA_QUERY6_", query);
+}
+
 
 void extract_response6(std::vector<std::string>& env, const Pkt6Ptr response)
 {
-    /* General information */
-    env.push_back("KEA_RESPONSE6_TYPE=" + std::string(response->getName()));
-    env.push_back("KEA_RESPONSE6_INTERFACE=" + response->getIface());
-    /* TODO, this may not always exist in the response */
-    env.push_back("KEA_RESPONSE6_ADDRESS=");
-    env.push_back("KEA_RESPONSE6_PREFERRED_LIFETIME=");
-    env.push_back("KEA_RESPONSE6_VALID_LIFETIME=");
-    /* TODO */
-    env.push_back("KEA_RESPONSE6_DEBUG=" + response->toText());
+    extract_pkt6(env, "KEA_RESPONSE6_", response);
 }
 
 void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
