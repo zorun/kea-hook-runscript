@@ -105,18 +105,32 @@ void extract_response6(std::vector<std::string>& env, const Pkt6Ptr response)
 
 void extract_subnet4(std::vector<std::string>& env, const Subnet4Ptr subnet)
 {
-    env.push_back("KEA_SUBNET4=" + subnet->toText());
-    std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
-    env.push_back("KEA_SUBNET4_PREFIX=" + prefix.first.toText());
-    env.push_back("KEA_SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
+    /* The subnet given by Kea might be NULL, this seems to happen when
+     * Kea fails to find a matching subnet for a client request. */
+    if (subnet != NULL) {
+        env.push_back("KEA_SUBNET4=" + subnet->toText());
+        std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
+        env.push_back("KEA_SUBNET4_PREFIX=" + prefix.first.toText());
+        env.push_back("KEA_SUBNET4_PREFIXLEN=" + std::to_string(prefix.second));
+    } else {
+        env.push_back("KEA_SUBNET4=");
+        env.push_back("KEA_SUBNET4_PREFIX=");
+        env.push_back("KEA_SUBNET4_PREFIXLEN=");
+    }
 }
 
 void extract_subnet6(std::vector<std::string>& env, const Subnet6Ptr subnet)
 {
-    env.push_back("KEA_SUBNET6=" + subnet->toText());
-    std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
-    env.push_back("KEA_SUBNET6_PREFIX=" + prefix.first.toText());
-    env.push_back("KEA_SUBNET6_PREFIXLEN=" + std::to_string(prefix.second));
+    if (subnet != NULL) {
+        env.push_back("KEA_SUBNET6=" + subnet->toText());
+        std::pair<isc::asiolink::IOAddress, uint8_t> prefix = subnet->get();
+        env.push_back("KEA_SUBNET6_PREFIX=" + prefix.first.toText());
+        env.push_back("KEA_SUBNET6_PREFIXLEN=" + std::to_string(prefix.second));
+    } else {
+        env.push_back("KEA_SUBNET6=");
+        env.push_back("KEA_SUBNET6_PREFIX=");
+        env.push_back("KEA_SUBNET6_PREFIXLEN=");
+    }
 }
 
 void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
