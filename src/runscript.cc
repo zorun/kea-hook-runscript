@@ -18,7 +18,7 @@ int run_script(std::string arg0, std::vector<std::string> env)
      * expected by execle(). */
     char const* envp[env.size() + 1];
     for (int i = 0; i < env.size(); ++i) {
-        envp[i] = env[i].data();
+        envp[i] = env[i].c_str();
     }
     envp[env.size()] = (char const*) NULL;
 
@@ -32,7 +32,7 @@ int run_script(std::string arg0, std::vector<std::string> env)
     }
     if (pid == 0) {
         /* Child process */
-        ret = execle(script_path.data(), script_name.data(), arg0.data(), (char *)NULL, envp);
+        ret = execle(script_path.c_str(), script_name.c_str(), arg0.c_str(), (char *)NULL, envp);
         LOG_ERROR(runscript_logger, RUNSCRIPT_EXEC_FAILED).arg(strerror(errno));
         /* This only exists the child, not Kea itself. */
         exit(EXIT_FAILURE);
