@@ -392,23 +392,54 @@ Here are all possible variables for DHCPv6, with their type, description
 and reference of the possible values.  Booleans are simply expressed with
 `0` and `1`.
 
-| Variable name                      | Type     | Description                                                 | Reference                                                                                                      |
-|------------------------------------|----------|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `KEA_QUERY6_TYPE`                  | `string` | Type of DHCPv6 message                                      | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                        |
-| `KEA_QUERY6_INTERFACE`             | `string` | Interface on which query was received                       |                                                                                                                |
-| `KEA_QUERY6_DUID`                  | `string` | TODO                                                        |                                                                                                                |
-| `KEA_QUERY6_HWADDR`                | `string` | TODO                                                        |                                                                                                                |
-| `KEA_RESPONSE6_TYPE`               | `string` | Type of DHCPv6 message                                      | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                        |
-| `KEA_RESPONSE6_INTERFACE`          | `string` | Interface on which response is being sent                   |                                                                                                                |
-| `KEA_RESPONSE6_ADDRESS`            | `string` | TODO                                                        |                                                                                                                |
-| `KEA_RESPONSE6_PREFERRED_LIFETIME` | `int`    | TODO                                                        |                                                                                                                |
-| `KEA_RESPONSE6_VALID_LIFETIME`     | `int`    | TODO                                                        |                                                                                                                |
-| `KEA_SUBNET6_PREFIX`               | `IPv6`   | IP prefix of the subnet (without prefix length)             |                                                                                                                |
-| `KEA_SUBNET6_PREFIXLEN`            | `int`    | Prefix length of the subnet (`0` to `128`)                  |                                                                                                                |
-| `KEA_SUBNET6`                      | `string` | `KEA_SUBNET6_PREFIX`/`KEA_SUBNET6_PREFIXLEN`                |                                                                                                                |
-| `KEA_LEASE6_ADDRESS`               | `IPv6`   | IPv6 address leased to client                               |                                                                                                                |
-| `KEA_REMOVE_LEASE`                 | `bool`   | Whether the lease should be removed from the lease database | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Expire) |
-| `KEA_FAKE_ALLOCATION`              | `bool`   | Whether the query is a SOLICIT or a REQUEST                 | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Select) |
+| Variable name                         | Type     | Description                                                                         | Reference                                                                                                                                |
+|---------------------------------------|----------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `KEA_QUERY6_TYPE`                     | `string` | Type of DHCPv6 message                                                              | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                                                  |
+| `KEA_QUERY6_INTERFACE`                | `string` | Interface on which query was received                                               |                                                                                                                                          |
+| `KEA_QUERY6_IFINDEX`                  | `int`    | Index of the interface on which query was received                                  |                                                                                                                                          |
+| `KEA_QUERY6_DUID`                     | `string` | TODO                                                                                |                                                                                                                                          |
+| `KEA_QUERY6_HWADDR`                   | `string` | Hardware address of the client (its MAC address)                                    |                                                                                                                                          |
+| `KEA_QUERY6_HWADDR_TYPE`              | `int`    | Type of hardware address                                                            | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46f)           |
+| `KEA_QUERY6_HWADDR_SOURCE`            | `int`    | How this MAC address was obtained                                                   | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                              |
+| `KEA_QUERY6_LOCAL_ADDRESS`            | `string` | Local IPv6 address on which the query was received (link-local or multicast)        | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#a55b5c3f4cbab0f60968b0498d8543c65)          |
+| `KEA_QUERY6_LOCAL_PORT`               | `int`    | Local UDP or TCP port                                                               |                                                                                                                                          |
+| `KEA_QUERY6_REMOTE_ADDRESS`           | `string` | Remote IPv6 address, from which the query was received (link-local)                 | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#a1e20bcdc69d5f97ed8cc48290017b8d9)          |
+| `KEA_QUERY6_REMOTE_PORT`              | `int`    | Remote UDP or TCP port                                                              |                                                                                                                                          |
+| `KEA_QUERY6_LABEL`                    | `string` | Unique identifier of the query, to be used e.g. in log messages                     | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#af9888e61c5304f4bac1983a93ac6a473)          |
+| `KEA_QUERY6_TRANSACTION_ID`           | `int`    | Transaction ID of the query                                                         | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#a8cd6c6ab6c434b1bf6949bb1cc4102b1)          |
+| `KEA_RESPONSE6_TYPE`                  | `string` | Type of DHCPv6 message                                                              | [dhcp/dhcp6.h](https://jenkins.isc.org/job/Kea_doc/doxygen/db/d87/dhcp6_8h_source.html)                                                  |
+| `KEA_RESPONSE6_INTERFACE`             | `string` | Interface on which response is being sent                                           |                                                                                                                                          |
+| `KEA_RESPONSE6_IFINDEX`               | `int`    | Index of the interface on which response is being sent                              |                                                                                                                                          |
+| `KEA_RESPONSE6_DUID`                  | `string` | TODO                                                                                |                                                                                                                                          |
+| `KEA_RESPONSE6_HWADDR`                | `string` | Hardware address of the client (its MAC address)                                    |                                                                                                                                          |
+| `KEA_RESPONSE6_HWADDR_TYPE`           | `int`    | Type of hardware address                                                            | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46f)           |
+| `KEA_RESPONSE6_HWADDR_SOURCE`         | `int`    | How this MAC address was obtained                                                   | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                              |
+| `KEA_RESPONSE6_LOCAL_ADDRESS`         | `string` | Local IPv6 address, from which the response is being sent (link-local or multicast) | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#a55b5c3f4cbab0f60968b0498d8543c65)          |
+| `KEA_RESPONSE6_LOCAL_PORT`            | `int`    | Local UDP or TCP port                                                               |                                                                                                                                          |
+| `KEA_RESPONSE6_REMOTE_ADDRESS`        | `string` | Remote IPv6 address, to which the response is being sent (link-local)               | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#a1e20bcdc69d5f97ed8cc48290017b8d9)          |
+| `KEA_RESPONSE6_REMOTE_PORT`           | `int`    | Remote UDP or TCP port                                                              |                                                                                                                                          |
+| `KEA_RESPONSE6_LABEL`                 | `string` | Unique identifier of the response, to be used e.g. in log messages                  | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#af9888e61c5304f4bac1983a93ac6a473)          |
+| `KEA_RESPONSE6_TRANSACTION_ID`        | `int`    | Transaction ID of the response                                                      | [dhcp/pkt.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d71/classisc_1_1dhcp_1_1Pkt.html#a8cd6c6ab6c434b1bf6949bb1cc4102b1)          |
+| `KEA_SUBNET6_PREFIX`                  | `IPv6`   | IP prefix of the subnet (without prefix length)                                     |                                                                                                                                          |
+| `KEA_SUBNET6_PREFIXLEN`               | `int`    | Prefix length of the subnet (`0` to `128`)                                          |                                                                                                                                          |
+| `KEA_SUBNET6`                         | `string` | `KEA_SUBNET6_PREFIX`/`KEA_SUBNET6_PREFIXLEN`                                        |                                                                                                                                          |
+| `KEA_LEASE6_TYPE`                     | `string` | Type of lease, either "NA", "TA", or "PD"                                           | [dhcp/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a9257a6a410119ea79f29b9d2756c8769)     |
+| `KEA_LEASE6_ADDRESS`                  | `IPv6`   | IPv6 address leased to client                                                       |                                                                                                                                          |
+| `KEA_LEASE6_DELEGATED_PREFIX`         | `string` | For TYPE="PD", prefix delegated to client (in `prefix/prefixlen` form)              |                                                                                                                                          |
+| `KEA_LEASE6_DELEGATED_PREFIXLEN`      | `int`    | For TYPE="PD", length of the prefix delegated to client                             |                                                                                                                                          |
+| `KEA_LEASE6_CLIENT_DUID`              | `string` | DUID of the client                                                                  |                                                                                                                                          |
+| `KEA_LEASE6_HWADDR`                   | `string` | Hardware address of the client                                                      |                                                                                                                                          |
+| `KEA_LEASE6_HOSTNAME`                 | `string` | Hostname associated to the client                                                   |                                                                                                                                          |
+| `KEA_LEASE6_STATE`                    | `string` | Current state of the lease                                                          | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a7075e6229e9eadedf27fc9ff49ece3c1)  |
+| `KEA_LEASE6_IS_EXPIRED`               | `bool`   | Whether the lease is expired                                                        |                                                                                                                                          |
+| `KEA_LEASE6_CLIENT_LAST_TRANSMISSION` | `int`    | Unix timestamp of the last message received from the client                         | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#ac71dc7f97dd753096a0f448c6649cdcf)  |
+| `KEA_LEASE6_RENEW_TIMER`              | `int`    | Renewal timer (T1), in seconds                                                      | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a181eba444070cba92db9e722377a1f0d)  |
+| `KEA_LEASE6_REBIND_TIMER`             | `int`    | Rebinding timer (T2), in seconds                                                    | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a3061e56eb6b364ce2a063cf920108ab4)  |
+| `KEA_LEASE6_VALID_LIFETIME`           | `int`    | Valid lifetime of the lease, in seconds                                             | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a615302a9140991942225b9809ddd50fb)  |
+| `KEA_LEASE6_PREFERRED_LIFETIME`       | `int`    | Preferred lifetime of the lease, in seconds                                         | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/ddc/structisc_1_1dhcp_1_1Lease6.html#acece7ab17d67a657637cf16a9a2f1f6e) |
+| `KEA_LEASE6_IAID`                     | `string` | Identity Association Identifier, to differentiate between IA containers             | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/ddc/structisc_1_1dhcp_1_1Lease6.html#acc2e175c33e09dbdc8c93b943488431e) |
+| `KEA_REMOVE_LEASE`                    | `bool`   | Whether the lease should be removed from the lease database                         | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Expire)                           |
+| `KEA_FAKE_ALLOCATION`                 | `bool`   | Whether the query is a SOLICIT or a REQUEST                                         | [DHCPv6 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Select)                           |
 
 ## DHCPv6 hook points
 
@@ -419,27 +450,62 @@ script.
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
 
 ### [`pkt6_send`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksPkt6Send)
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
 - `KEA_RESPONSE6_TYPE`
 - `KEA_RESPONSE6_INTERFACE`
-- `KEA_RESPONSE6_ADDRESS`
-- `KEA_RESPONSE6_PREFERRED_LIFETIME`
-- `KEA_RESPONSE6_VALID_LIFETIME`
+- `KEA_RESPONSE6_IFINDEX`
+- `KEA_RESPONSE6_DUID`
+- `KEA_RESPONSE6_HWADDR`
+- `KEA_RESPONSE6_HWADDR_TYPE`
+- `KEA_RESPONSE6_HWADDR_SOURCE`
+- `KEA_RESPONSE6_LOCAL_ADDRESS`
+- `KEA_RESPONSE6_LOCAL_PORT`
+- `KEA_RESPONSE6_REMOTE_ADDRESS`
+- `KEA_RESPONSE6_REMOTE_PORT`
+- `KEA_RESPONSE6_LABEL`
+- `KEA_RESPONSE6_TRANSACTION_ID`
 
 ### [`subnet6_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksSubnet6Select)
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
 - `KEA_SUBNET6_PREFIX`
 - `KEA_SUBNET6_PREFIXLEN`
 - `KEA_SUBNET6`
@@ -448,29 +514,98 @@ script.
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
 - `KEA_SUBNET6_PREFIX`
 - `KEA_SUBNET6_PREFIXLEN`
 - `KEA_SUBNET6`
 - `KEA_FAKE_ALLOCATION`
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 
 ### [`lease6_renew`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Renew)
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 
 ### [`lease6_rebind`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Rebind)
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 
 ### [`lease6_decline`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Decline)
 
@@ -478,24 +613,97 @@ script.
 - `KEA_QUERY6_INTERFACE`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 
 ### [`lease6_release`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Release)
 
 - `KEA_QUERY6_TYPE`
 - `KEA_QUERY6_INTERFACE`
+- `KEA_QUERY6_IFINDEX`
 - `KEA_QUERY6_DUID`
 - `KEA_QUERY6_HWADDR`
+- `KEA_QUERY6_HWADDR_TYPE`
+- `KEA_QUERY6_HWADDR_SOURCE`
+- `KEA_QUERY6_LOCAL_ADDRESS`
+- `KEA_QUERY6_LOCAL_PORT`
+- `KEA_QUERY6_REMOTE_ADDRESS`
+- `KEA_QUERY6_REMOTE_PORT`
+- `KEA_QUERY6_LABEL`
+- `KEA_QUERY6_TRANSACTION_ID`
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 
 ### [`lease6_expire`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Expire)
 
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 - `KEA_REMOVE_LEASE`
 
 ### [`lease6_recover`](https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html#dhcpv6HooksLease6Recover)
 
+- `KEA_LEASE6_TYPE`
 - `KEA_LEASE6_ADDRESS`
+- `KEA_LEASE6_DELEGATED_PREFIX`
+- `KEA_LEASE6_DELEGATED_PREFIXLEN`
+- `KEA_LEASE6_CLIENT_DUID`
+- `KEA_LEASE6_HWADDR`
+- `KEA_LEASE6_HOSTNAME`
+- `KEA_LEASE6_STATE`
+- `KEA_LEASE6_IS_EXPIRED`
+- `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE6_RENEW_TIMER`
+- `KEA_LEASE6_REBIND_TIMER`
+- `KEA_LEASE6_VALID_LIFETIME`
+- `KEA_LEASE6_PREFERRED_LIFETIME`
+- `KEA_LEASE6_IAID`
 
 
 # TODO
