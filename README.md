@@ -144,22 +144,45 @@ Here are all possible variables for DHCPv4, with their type, description
 and reference of the possible values.  Booleans are simply expressed with
 `0` and `1`.
 
-| Variable name              | Type     | Description                                                 | Reference                                                                                                                                                       |
-|----------------------------|----------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `KEA_QUERY4_TYPE`          | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
-| `KEA_QUERY4_INTERFACE`     | `string` | Interface on which query was received                       |                                                                                                                                                                 |
-| `KEA_QUERY4_RELAYED`       | `bool`   | Whether query was relayed                                   | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
-| `KEA_QUERY4_HWADDR`        | `string` | Hardware address of the client (often MAC address)          |                                                                                                                                                                 |
-| `KEA_QUERY4_HWADDR_TYPE`   | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
-| `KEA_QUERY4_HWADDR_SOURCE` | `int`    | Currently always set to `0`                                 | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d2/db9/structisc_1_1dhcp_1_1HWAddr.html)                                                            |
-| `KEA_RESPONSE4_TYPE`       | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
-| `KEA_RESPONSE4_INTERFACE`  | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
-| `KEA_SUBNET4_PREFIX`       | `IPv4`   | IP prefix of the subnet (without prefix length)             |                                                                                                                                                                 |
-| `KEA_SUBNET4_PREFIXLEN`    | `int`    | Prefix length of the subnet (`0` to `32`)                   |                                                                                                                                                                 |
-| `KEA_SUBNET4`              | `string` | `KEA_SUBNET4_PREFIX`/`KEA_SUBNET4_PREFIXLEN`                |                                                                                                                                                                 |
-| `KEA_LEASE4_ADDRESS`       | `IPv4`   | IPv4 address leased to client                               |                                                                                                                                                                 |
-| `KEA_REMOVE_LEASE`         | `bool`   | Whether the lease should be removed from the lease database | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)                                                  |
-| `KEA_FAKE_ALLOCATION`      | `bool`   | Whether the query is a DISCOVER or a REQUEST                | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLeaseSelect)                                                   |
+| Variable name                         | Type     | Description                                                 | Reference                                                                                                                                                       |
+|---------------------------------------|----------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `KEA_QUERY4_TYPE`                     | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
+| `KEA_QUERY4_INTERFACE`                | `string` | Interface on which query was received                       |                                                                                                                                                                 |
+| `KEA_QUERY4_HWADDR`                   | `string` | Hardware address of the client (its MAC address)            |                                                                                                                                                                 |
+| `KEA_QUERY4_HWADDR_TYPE`              | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
+| `KEA_QUERY4_HWADDR_SOURCE`            | `int`    | How this MAC address was obtained                           | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                                                     |
+| `KEA_QUERY4_RELAYED`                  | `bool`   | Whether query was relayed                                   | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
+| `KEA_QUERY4_RELAY_HOPS`               | `int`    | Number of relay agents traversed                            |                                                                                                                                                                 |
+| `KEA_QUERY4_CIADDR`                   | `string` | Client IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_QUERY4_SIADDR`                   | `string` | Server IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_QUERY4_YIADDR`                   | `string` | Your IP address                                             | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_QUERY4_GIADDR`                   | `string` | Gateway IP address (inserted by DHCP relay)                 | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_RESPONSE4_TYPE`                  | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
+| `KEA_RESPONSE4_INTERFACE`             | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
+| `KEA_RESPONSE4_HWADDR`                | `string` | Hardware address of the client (its MAC address)            |                                                                                                                                                                 |
+| `KEA_RESPONSE4_HWADDR_TYPE`           | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
+| `KEA_RESPONSE4_HWADDR_SOURCE`         | `int`    | How this MAC address was obtained                           | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                                                     |
+| `KEA_RESPONSE4_RELAYED`               | `bool`   | Whether response is relayed                                 | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
+| `KEA_RESPONSE4_RELAY_HOPS`            | `int`    | Number of relay agents traversed                            |                                                                                                                                                                 |
+| `KEA_RESPONSE4_CIADDR`                | `string` | Client IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_RESPONSE4_SIADDR`                | `string` | Server IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_RESPONSE4_YIADDR`                | `string` | Your IP address                                             | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_RESPONSE4_GIADDR`                | `string` | Gateway IP address                                          | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_SUBNET4_PREFIX`                  | `IPv4`   | IP prefix of the subnet (without prefix length)             |                                                                                                                                                                 |
+| `KEA_SUBNET4_PREFIXLEN`               | `int`    | Prefix length of the subnet (`0` to `32`)                   |                                                                                                                                                                 |
+| `KEA_SUBNET4`                         | `string` | `KEA_SUBNET4_PREFIX`/`KEA_SUBNET4_PREFIXLEN`                |                                                                                                                                                                 |
+| `KEA_LEASE4_ADDRESS`                  | `IPv4`   | IPv4 address leased to client                               |                                                                                                                                                                 |
+| `KEA_LEASE4_TYPE`                     | `string` | Type of lease, always equal to "V4"                         |                                                                                                                                                                 |
+| `KEA_LEASE4_HWADDR`                   | `string` | Hardware address of the client                              |                                                                                                                                                                 |
+| `KEA_LEASE4_HOSTNAME`                 | `string` | Hostname associated to the client                           |                                                                                                                                                                 |
+| `KEA_LEASE4_STATE`                    | `string` | Current state of the lease                                  | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a7075e6229e9eadedf27fc9ff49ece3c1)                         |
+| `KEA_LEASE4_IS_EXPIRED`               | `bool`   | Whether the lease is expired                                |                                                                                                                                                                 |
+| `KEA_LEASE4_CLIENT_LAST_TRANSMISSION` | `int`    | Unix timestamp of the last message received from the client | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#ac71dc7f97dd753096a0f448c6649cdcf)                         |
+| `KEA_LEASE4_RENEW_TIMER`              | `int`    | Renewal timer (T1), in seconds                              | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a181eba444070cba92db9e722377a1f0d)                         |
+| `KEA_LEASE4_REBIND_TIMER`             | `int`    | Rebinding timer (T2), in seconds                            | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a3061e56eb6b364ce2a063cf920108ab4)                         |
+| `KEA_LEASE4_VALID_LIFETIME`           | `int`    | Valid lifetime of the lease, in seconds                     | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a615302a9140991942225b9809ddd50fb)                         |
+| `KEA_REMOVE_LEASE`                    | `bool`   | Whether the lease should be removed from the lease database | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)                                                  |
+| `KEA_FAKE_ALLOCATION`                 | `bool`   | Whether the query is a DISCOVER or a REQUEST                | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLeaseSelect)                                                   |
 
 ## DHCPv4 hook points
 
@@ -174,6 +197,11 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 
 ### [`pkt4_send`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksPkt4Send)
 
@@ -183,8 +211,22 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 - `KEA_RESPONSE4_TYPE`
 - `KEA_RESPONSE4_INTERFACE`
+- `KEA_RESPONSE4_HWADDR`
+- `KEA_RESPONSE4_HWADDR_SOURCE`
+- `KEA_RESPONSE4_HWADDR_TYPE`
+- `KEA_RESPONSE4_RELAYED`
+- `KEA_RESPONSE4_RELAY_HOPS`
+- `KEA_RESPONSE4_CIADDR`
+- `KEA_RESPONSE4_SIADDR`
+- `KEA_RESPONSE4_YIADDR`
+- `KEA_RESPONSE4_GIADDR`
 
 ### [`subnet4_select`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksSubnet4Select)
 
@@ -194,6 +236,11 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 - `KEA_SUBNET4_PREFIX`
 - `KEA_SUBNET4_PREFIXLEN`
 - `KEA_SUBNET4`
@@ -206,11 +253,25 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 - `KEA_SUBNET4_PREFIX`
 - `KEA_SUBNET4_PREFIXLEN`
 - `KEA_SUBNET4`
 - `KEA_FAKE_ALLOCATION`
 - `KEA_LEASE4_ADDRESS`
+- `KEA_LEASE4_TYPE`
+- `KEA_LEASE4_STATE`
+- `KEA_LEASE4_IS_EXPIRED`
+- `KEA_LEASE4_HWADDR`
+- `KEA_LEASE4_HOSTNAME`
+- `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE4_RENEW_TIMER`
+- `KEA_LEASE4_REBIND_TIMER`
+- `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_renew`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Renew)
 
@@ -220,10 +281,24 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 - `KEA_SUBNET4_PREFIX`
 - `KEA_SUBNET4_PREFIXLEN`
 - `KEA_SUBNET4`
 - `KEA_LEASE4_ADDRESS`
+- `KEA_LEASE4_TYPE`
+- `KEA_LEASE4_STATE`
+- `KEA_LEASE4_IS_EXPIRED`
+- `KEA_LEASE4_HWADDR`
+- `KEA_LEASE4_HOSTNAME`
+- `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE4_RENEW_TIMER`
+- `KEA_LEASE4_REBIND_TIMER`
+- `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_release`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Release)
 
@@ -233,7 +308,21 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 - `KEA_LEASE4_ADDRESS`
+- `KEA_LEASE4_TYPE`
+- `KEA_LEASE4_STATE`
+- `KEA_LEASE4_IS_EXPIRED`
+- `KEA_LEASE4_HWADDR`
+- `KEA_LEASE4_HOSTNAME`
+- `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE4_RENEW_TIMER`
+- `KEA_LEASE4_REBIND_TIMER`
+- `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_decline`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Decline)
 
@@ -243,16 +332,48 @@ script.
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
+- `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_CIADDR`
+- `KEA_QUERY4_SIADDR`
+- `KEA_QUERY4_YIADDR`
+- `KEA_QUERY4_GIADDR`
 - `KEA_LEASE4_ADDRESS`
+- `KEA_LEASE4_TYPE`
+- `KEA_LEASE4_STATE`
+- `KEA_LEASE4_IS_EXPIRED`
+- `KEA_LEASE4_HWADDR`
+- `KEA_LEASE4_HOSTNAME`
+- `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE4_RENEW_TIMER`
+- `KEA_LEASE4_REBIND_TIMER`
+- `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_expire`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)
 
 - `KEA_LEASE4_ADDRESS`
+- `KEA_LEASE4_TYPE`
+- `KEA_LEASE4_STATE`
+- `KEA_LEASE4_IS_EXPIRED`
+- `KEA_LEASE4_HWADDR`
+- `KEA_LEASE4_HOSTNAME`
+- `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE4_RENEW_TIMER`
+- `KEA_LEASE4_REBIND_TIMER`
+- `KEA_LEASE4_VALID_LIFETIME`
 - `KEA_REMOVE_LEASE`
 
 ### [`lease4_recover`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Recover)
 
 - `KEA_LEASE4_ADDRESS`
+- `KEA_LEASE4_TYPE`
+- `KEA_LEASE4_STATE`
+- `KEA_LEASE4_IS_EXPIRED`
+- `KEA_LEASE4_HWADDR`
+- `KEA_LEASE4_HOSTNAME`
+- `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
+- `KEA_LEASE4_RENEW_TIMER`
+- `KEA_LEASE4_REBIND_TIMER`
+- `KEA_LEASE4_VALID_LIFETIME`
 
 
 ## DHCPv6 variables
