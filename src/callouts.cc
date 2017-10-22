@@ -30,6 +30,7 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
     /* General information */
     env.push_back(envprefix + "TYPE=" + std::string(pkt4->getName()));
     env.push_back(envprefix + "INTERFACE=" + pkt4->getIface());
+    env.push_back(envprefix + "IFINDEX=" + std::to_string(pkt4->getIndex()));
     /* Hardware address */
     HWAddrPtr hwaddr = pkt4->getMAC(HWAddr::HWADDR_SOURCE_ANY);
     if (hwaddr) {

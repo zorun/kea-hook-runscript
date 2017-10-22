@@ -148,6 +148,7 @@ and reference of the possible values.  Booleans are simply expressed with
 |---------------------------------------|----------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `KEA_QUERY4_TYPE`                     | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
 | `KEA_QUERY4_INTERFACE`                | `string` | Interface on which query was received                       |                                                                                                                                                                 |
+| `KEA_QUERY4_IFINDEX`                  | `int`    | Index of the interface on which query was received          |                                                                                                                                                                 |
 | `KEA_QUERY4_HWADDR`                   | `string` | Hardware address of the client (its MAC address)            |                                                                                                                                                                 |
 | `KEA_QUERY4_HWADDR_TYPE`              | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
 | `KEA_QUERY4_HWADDR_SOURCE`            | `int`    | How this MAC address was obtained                           | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                                                     |
@@ -159,6 +160,7 @@ and reference of the possible values.  Booleans are simply expressed with
 | `KEA_QUERY4_GIADDR`                   | `string` | Gateway IP address (inserted by DHCP relay)                 | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
 | `KEA_RESPONSE4_TYPE`                  | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
 | `KEA_RESPONSE4_INTERFACE`             | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
+| `KEA_RESPONSE4_IFINDEX`               | `int`    | Index of the interface on which response is being sent      |                                                                                                                                                                 |
 | `KEA_RESPONSE4_HWADDR`                | `string` | Hardware address of the client (its MAC address)            |                                                                                                                                                                 |
 | `KEA_RESPONSE4_HWADDR_TYPE`           | `int`    | Type of hardware address                                    | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#addcff933049489d800f9869196c8e46fa96a62c59182d6e06780b0e1ef40da059) |
 | `KEA_RESPONSE4_HWADDR_SOURCE`         | `int`    | How this MAC address was obtained                           | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                                                     |
@@ -193,6 +195,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
@@ -207,6 +210,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
@@ -218,6 +222,7 @@ script.
 - `KEA_QUERY4_GIADDR`
 - `KEA_RESPONSE4_TYPE`
 - `KEA_RESPONSE4_INTERFACE`
+- `KEA_RESPONSE4_IFINDEX`
 - `KEA_RESPONSE4_HWADDR`
 - `KEA_RESPONSE4_HWADDR_SOURCE`
 - `KEA_RESPONSE4_HWADDR_TYPE`
@@ -232,6 +237,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
@@ -249,6 +255,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
@@ -277,6 +284,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
@@ -304,6 +312,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
@@ -328,6 +337,7 @@ script.
 
 - `KEA_QUERY4_TYPE`
 - `KEA_QUERY4_INTERFACE`
+- `KEA_QUERY4_IFINDEX`
 - `KEA_QUERY4_HWADDR`
 - `KEA_QUERY4_HWADDR_SOURCE`
 - `KEA_QUERY4_HWADDR_TYPE`
