@@ -37,20 +37,24 @@ int run_script(std::string arg0, std::vector<std::string> env)
         /* This only exists the child, not Kea itself. */
         exit(EXIT_FAILURE);
     } else {
-        /* Parent process */
-        LOG_DEBUG(runscript_logger, 50, RUNSCRIPT_WAITING_SCRIPT);
-        ret = wait(&wstatus);
-        if (ret == -1) {
-            LOG_ERROR(runscript_logger, RUNSCRIPT_WAITPID_FAILED).arg(strerror(errno));
-            return -1;
+        if (script_wait) {
+            /* Parent process */
+            LOG_DEBUG(runscript_logger, 50, RUNSCRIPT_WAITING_SCRIPT);
+            ret = wait(&wstatus);
+            if (ret == -1) {
+                LOG_ERROR(runscript_logger, RUNSCRIPT_WAITPID_FAILED).arg(strerror(errno));
+                return -1;
+            }
+            /* Get exit code */
+            if (WIFEXITED(wstatus))
+                exitcode = WEXITSTATUS(wstatus);
+            else
+                /* By default, assume everything worked well */
+                exitcode = 0;
+            return exitcode;
+        } else {
+            return 0;
         }
-        /* Get exit code */
-        if (WIFEXITED(wstatus))
-            exitcode = WEXITSTATUS(wstatus);
-        else
-            /* By default, assume everything worked well */
-            exitcode = 0;
-        return exitcode;
     }
 }
 

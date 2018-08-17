@@ -11,6 +11,8 @@ using namespace isc::data;
 std::string script_path;
 /* Name of the script (without the leading directory). */
 std::string script_name;
+/* Wait for script to finish executing */
+bool script_wait;
 
 extern "C" {
 
@@ -26,6 +28,16 @@ int load(LibraryHandle& handle) {
     }
     script_path = script->stringValue();
     script_name = script_path.substr(script_path.find_last_of('/') + 1);
+
+    ConstElementPtr wait = handle.getParameter("wait");
+    if (!wait) {
+       script_wait = true;
+    } else if (wait->getType() != Element::boolean) {
+       LOG_ERROR(runscript_logger, RUNSCRIPT_MISTYPED_PARAM).arg("wait");
+       return 1;
+    } else {
+       script_wait = wait->boolValue();
+    }
 
     return 0;
 }
