@@ -33,12 +33,13 @@ int run_script(std::string arg0, std::vector<std::string> env)
     if (pid == 0) {
         /* Child process */
         ret = execle(script_path.c_str(), script_name.c_str(), arg0.c_str(), (char *)NULL, envp);
+        /* execle never returns when everything went well, so we necessarily encountered an error. */
         LOG_ERROR(runscript_logger, RUNSCRIPT_EXEC_FAILED).arg(strerror(errno));
-        /* This only exists the child, not Kea itself. */
+        /* This only exits the child, not Kea itself. */
         exit(EXIT_FAILURE);
     } else {
+        /* Parent process */
         if (script_wait) {
-            /* Parent process */
             LOG_DEBUG(runscript_logger, 50, RUNSCRIPT_WAITING_SCRIPT);
             ret = wait(&wstatus);
             if (ret == -1) {
