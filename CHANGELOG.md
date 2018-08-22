@@ -1,5 +1,9 @@
 # Changelog for kea-hook-runscript
 
+## unreleased
+
+- allow to run the script asynchronously (wait=false)
+
 ## 1.1.0 (2017-10-22)
 
 - Add lots of DHCPv6 variables: DHCPv6 should now be usable

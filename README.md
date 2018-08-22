@@ -17,13 +17,17 @@ be a simple script (shell, Perl, Python...).  Information about what Kea is doin
 is provided to the external script through environment variables: MAC address of
 the requesting DHCP client, IP address being handed out, etc.
 
-Each time Kea encounters a hook point, it will call the script **synchronously**.
+Each time Kea encounters a hook point, it will (by default) call the script
+**synchronously**.
 That is, Kea will do absolutely nothing else while the script is running.
 Thus, it is a good idea to perform only lightweight processing in the script,
 and absolutely avoid blocking operations.  Also, scripting languages that need
 to initialise a huge interpreter (such as Python or Ruby) will cause a large
 amount of CPU usage and a massive slowdown of Kea, because the script is run
 multiple times for each DHCP transaction.
+
+If you know what you are doing, you can optionally call the script **asynchronously**
+by setting `wait` to `false` (see below).
 
 This hook works for both DHCPv4 and DHCPv6, on Kea 1.1 and above.
 
@@ -115,13 +119,19 @@ Then, here is how to tell Kea to use this hook, for DHCPv4:
         {
           "library": "/path/to/hea-hook-runscript/kea-hook-runscript.so",
           "parameters": {
-            "script": "/path/to/myscript.sh"
+            "script": "/path/to/myscript.sh",
+            "wait": true
           }
         }
       ],
       ...
     }
     }
+
+The `wait` parameter indicates whether Kea waits for the script to exit.  That is,
+if set to `true`, Kea will block while the script is running.
+If you need high-performance DHCP, you can set it to `false`, but you must be prepared
+to handle several instances of the script running in parallel.
 
 You can use the same script for both DHCPv4 and DHCPv6, or use two different scripts.
 
