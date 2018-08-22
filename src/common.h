@@ -8,5 +8,7 @@ extern "C" {
 extern std::string script_path;
 /* Name of the script (without the leading directory). */
 extern std::string script_name;
+/* Wait for script to finish executing */
+extern bool script_wait;
 
 }
