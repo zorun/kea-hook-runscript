@@ -1,3 +1,4 @@
+#include <signal.h>
 #include <hooks/hooks.h>
 
 #include "logger.h"
@@ -38,6 +39,11 @@ int load(LibraryHandle& handle) {
     } else {
        script_wait = wait->boolValue();
     }
+
+     /* Install signal handler for non-wait case to avoid leaving  zombie processes around */
+     if (!script_wait) {
+        signal(SIGCHLD, SIG_IGN);
+     }
 
     return 0;
 }
