@@ -1,8 +1,8 @@
 # Changelog for kea-hook-runscript
 
-## unreleased
+## 1.2.0 (2019-01-24)
 
-- allow to run the script asynchronously (wait=false)
+- Allow to run the script asynchronously (by setting `wait=false`, see `README`)
 
 ## 1.1.0 (2017-10-22)
 
