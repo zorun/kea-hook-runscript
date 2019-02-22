@@ -5,7 +5,7 @@ KEA_LIB ?= /usr/lib
 
 OBJECTS = src/messages.o src/logger.o src/load.o src/runscript.o src/callouts.o src/version.o
 DEPS = $(OBJECTS:.o=.d)
-CXXFLAGS = -I $(KEA_INCLUDE) -fPIC -Wno-deprecated
+CXXFLAGS = -I $(KEA_INCLUDE) -fPIC -Wno-deprecated -std=c++11
 LDFLAGS = -L $(KEA_LIB) -shared -lkea-dhcpsrv -lkea-dhcp++ -lkea-hooks -lkea-log -lkea-util -lkea-exceptions
 
 kea-hook-runscript.so: $(OBJECTS)
