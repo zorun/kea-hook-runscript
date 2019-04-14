@@ -166,6 +166,7 @@ and reference of the possible values.  Booleans are simply expressed with
 | `KEA_QUERY4_HWADDR_SOURCE`            | `int`    | How this MAC address was obtained                           | [dhcp/hwaddr.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/dae/group__hw__sources.html)                                                                     |
 | `KEA_QUERY4_RELAYED`                  | `bool`   | Whether query was relayed                                   | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html#a8468401827b9bacdd3796bb4e20d8e5e)                               |
 | `KEA_QUERY4_RELAY_HOPS`               | `int`    | Number of relay agents traversed                            |                                                                                                                                                                 |
+| `KEA_QUERY4_OPTION60`                 | `string` | Option 60 - vendor id                                       |                                                                                                                                                                 |
 | `KEA_QUERY4_CIADDR`                   | `string` | Client IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
 | `KEA_QUERY4_SIADDR`                   | `string` | Server IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
 | `KEA_QUERY4_YIADDR`                   | `string` | Your IP address                                             | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
@@ -213,6 +214,7 @@ script.
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
 - `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_OPTION60`
 - `KEA_QUERY4_CIADDR`
 - `KEA_QUERY4_SIADDR`
 - `KEA_QUERY4_YIADDR`
@@ -228,6 +230,7 @@ script.
 - `KEA_QUERY4_HWADDR_TYPE`
 - `KEA_QUERY4_RELAYED`
 - `KEA_QUERY4_RELAY_HOPS`
+- `KEA_QUERY4_OPTION60`
 - `KEA_QUERY4_CIADDR`
 - `KEA_QUERY4_SIADDR`
 - `KEA_QUERY4_YIADDR`

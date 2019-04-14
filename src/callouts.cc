@@ -57,6 +57,11 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
     env.push_back(envprefix + "RELAYED=" + std::to_string(pkt4->isRelayed()));
     env.push_back(envprefix + "RELAY_HOPS=" + std::to_string(pkt4->getHops()));
 
+    /* Specific Options */
+    OptionPtr option60 = pkt4->getOption(60);
+    if (option60) {
+        env.push_back(envprefix + "OPTION60=" + option60->toString());
+    }
 }
 
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
