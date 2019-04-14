@@ -7,6 +7,8 @@ The goal is to simplify integration with Kea: for many simple use-cases,
 it is overkill to have to write a full-blown Kea hook, where a simple shell script
 can do the job.
 
+This hook is licensed under the Mozilla Public License version 2 (MPL2).
+
 ## What it can and can't do
 
 Integration is mostly done one-way: thanks to this hook, Kea passes information
