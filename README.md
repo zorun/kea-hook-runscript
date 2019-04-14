@@ -95,7 +95,7 @@ Some notes on Kea versions:
 - Kea 1.2 is missing a header file by mistake, so depending on your
   distribution, you may need to manually copy `option6_pdexclude.h` from
   the Kea git repository to `/usr/include/kea/dhcp/`.
-- Kea 1.3 should work out-of-the-box.
+- Kea 1.3 to 1.5 should work out-of-the-box.
 
 To build against a local Kea source tree, assumed to be in `~/kea`:
 
