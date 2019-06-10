@@ -23,11 +23,23 @@ using namespace isc::hooks;
 
 extern "C" {
 
+std::string toText(const std::vector<uint8_t>& binary) {
+    return std::string(binary.begin(), binary.end());
+}
+
 /* These are helpers that extract relevant information from Kea data
  * structures and store them in environment variables. */
 void extract_bool(std::vector<std::string>& env, const std::string variable, bool value)
 {
     env.push_back(variable + "=" + std::string(value ? "1" : "0"));
+}
+
+void extract_string_option(int optionNr, std::vector<std::string>& env, const std::string envprefix, const Pkt4Ptr pkt4)
+{
+    OptionPtr option = pkt4->getOption(optionNr);
+    if (option) {
+        env.push_back(envprefix + "OPTION" + std::to_string(optionNr) + "=" + option->toString());
+    }
 }
 
 /* Extract information from a DHCPv4 packet (query received, or response
@@ -39,7 +51,7 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
     env.push_back(envprefix + "INTERFACE=" + pkt4->getIface());
     env.push_back(envprefix + "IFINDEX=" + std::to_string(pkt4->getIndex()));
     /* Hardware address */
-    HWAddrPtr hwaddr = pkt4->getMAC(HWAddr::HWADDR_SOURCE_ANY);
+    HWAddrPtr hwaddr = pkt4->getHWAddr();
     if (hwaddr) {
         env.push_back(envprefix + "HWADDR=" + hwaddr->toText(false));
         env.push_back(envprefix + "HWADDR_TYPE=" + std::to_string(hwaddr->htype_));
@@ -58,9 +70,17 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
     env.push_back(envprefix + "RELAY_HOPS=" + std::to_string(pkt4->getHops()));
 
     /* Specific Options */
-    OptionPtr option60 = pkt4->getOption(60);
-    if (option60) {
-        env.push_back(envprefix + "OPTION60=" + option60->toString());
+    extract_string_option(12, env, envprefix, pkt4);
+    extract_string_option(60, env, envprefix, pkt4);
+
+    OptionPtr option82 = pkt4->getOption(82);
+    if (option82) {
+        for(int a = 1; a < 3; a = a + 1) {
+            OptionPtr SubPtr = option82->getOption(a);
+            if (SubPtr) {
+                env.push_back(envprefix + "OPTION82_SUB" + std::to_string(a) + "=" + toText(SubPtr->toBinary(false)));
+            }
+        }
     }
 }
 

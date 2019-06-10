@@ -171,6 +171,8 @@ and reference of the possible values.  Booleans are simply expressed with
 | `KEA_QUERY4_SIADDR`                   | `string` | Server IP address                                           | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
 | `KEA_QUERY4_YIADDR`                   | `string` | Your IP address                                             | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
 | `KEA_QUERY4_GIADDR`                   | `string` | Gateway IP address (inserted by DHCP relay)                 | [dhcp/pkt4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/de/d13/classisc_1_1dhcp_1_1Pkt4.html)                                                                 |
+| `KEA_QUERY4_OPTION82_SUB1`            | `string` | Option 82 suboption 1 circuit ID		                 |                                                                                                                                                                 |
+| `KEA_QUERY4_OPTION82_SUB2`            | `string` | Option 82 suboption 2 remote ID		                 |                                                                                                                                                                 |
 | `KEA_RESPONSE4_TYPE`                  | `string` | Type of DHCP message                                        | [dhcp/dhcp4.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d5/d8c/namespaceisc_1_1dhcp.html#aa5bfdcc4861aa3dab5328dba89362016)                                  |
 | `KEA_RESPONSE4_INTERFACE`             | `string` | Interface on which response is being sent                   |                                                                                                                                                                 |
 | `KEA_RESPONSE4_IFINDEX`               | `int`    | Index of the interface on which response is being sent      |                                                                                                                                                                 |
@@ -219,6 +221,8 @@ script.
 - `KEA_QUERY4_SIADDR`
 - `KEA_QUERY4_YIADDR`
 - `KEA_QUERY4_GIADDR`
+- `KEA_QUERY4_OPTION82_SUB1`
+- `KEA_QUERY4_OPTION82_SUB2`
 
 ### [`pkt4_send`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksPkt4Send)
 
