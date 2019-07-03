@@ -82,6 +82,16 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
             }
         }
     }
+
+    OptionPtr option43 = pkt4->getOption(43);
+    if (option43) {
+        for(int a = 1; a < 13; a = a + 1) {
+            OptionPtr SubPtr = option43->getOption(a);
+            if (SubPtr) {
+                env.push_back(envprefix + "OPTION43_SUB" + std::to_string(a) + "=" + toText(SubPtr->toBinary(false)));
+            }
+        }
+    }
 }
 
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
