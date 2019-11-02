@@ -1,5 +1,11 @@
 # Changelog for kea-hook-runscript
 
+## 1.3.1 (2019-11-02)
+
+Misc:
+
+- Produce release tarballs with pre-built messages, to avoid depending on the `kea-msg-compiler` binary (#15)
+
 ## 1.3.0 (2019-11-02)
 
 New features:
