@@ -80,22 +80,24 @@ is to continously display the content of this file:
 
 ## How to build
 
-You first need to compile the hook.  For this, you need Kea and Boost
-development headers installed: on Debian, the packages are `kea-dev` and
-`libboost-dev`.
+To build the hook, you need Kea and Boost development headers, the `kea-msg-compiler`
+binary, and the Kea libraries.
 
-To build, simply run:
+### Using a packaged version of Kea
+
+If you use a Kea package, make sure you have the appropriate development packages:
+on Debian, the packages are `kea-dev` and `libboost-dev`.
+
+Then, to build the hook, simply run:
 
     $ make
 
-Some notes on Kea versions:
+When using ISC-provided packages hosted on Cloudsmith, it has been reported that the
+`kea-msg-compiler` binary may be missing (#15). In that case, build Kea from source
+as explained below, but only set `$KEA_MSG_COMPILER` (so that you still use the packaged
+headers and libraries of Kea).
 
-- Kea 1.1 does not install all required headers (most notably `dhcpsrv/`),
-  so you may need to build against Kea's source tree.
-- Kea 1.2 is missing a header file by mistake, so depending on your
-  distribution, you may need to manually copy `option6_pdexclude.h` from
-  the Kea git repository to `/usr/include/kea/dhcp/`.
-- Kea 1.3 to 1.5 should work out-of-the-box.
+### Building Kea from source
 
 To build against a local Kea source tree, assumed to be in `~/kea`:
 
@@ -108,6 +110,17 @@ Then build this hook with:
     $ export KEA_INCLUDE=$HOME/kea/src/lib
     $ export KEA_LIB=/tmp/kea/usr/local/lib
     $ make
+
+### Supported Kea versions
+
+Some notes on Kea versions:
+
+- Kea 1.1 does not install all required headers (most notably `dhcpsrv/`),
+  so you may need to build against Kea's source tree.
+- Kea 1.2 is missing a header file by mistake, so depending on your
+  distribution, you may need to manually copy `option6_pdexclude.h` from
+  the Kea git repository to `/usr/include/kea/dhcp/`.
+- Kea 1.3 to 1.6 should work out-of-the-box.
 
 ## How to use this hook
 
