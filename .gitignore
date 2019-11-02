@@ -2,6 +2,7 @@
 *.d
 *.so
 *~
+*.tar.gz
 s-messages
 src/messages.cc
 src/messages.h
