@@ -193,8 +193,6 @@ and reference of the possible values.  Booleans are simply expressed with
 | `KEA_LEASE4_STATE`                    | `string` | Current state of the lease                                  | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a7075e6229e9eadedf27fc9ff49ece3c1)                         |
 | `KEA_LEASE4_IS_EXPIRED`               | `bool`   | Whether the lease is expired                                |                                                                                                                                                                 |
 | `KEA_LEASE4_CLIENT_LAST_TRANSMISSION` | `int`    | Unix timestamp of the last message received from the client | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#ac71dc7f97dd753096a0f448c6649cdcf)                         |
-| `KEA_LEASE4_RENEW_TIMER`              | `int`    | Renewal timer (T1), in seconds                              | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a181eba444070cba92db9e722377a1f0d)                         |
-| `KEA_LEASE4_REBIND_TIMER`             | `int`    | Rebinding timer (T2), in seconds                            | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a3061e56eb6b364ce2a063cf920108ab4)                         |
 | `KEA_LEASE4_VALID_LIFETIME`           | `int`    | Valid lifetime of the lease, in seconds                     | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a615302a9140991942225b9809ddd50fb)                         |
 | `KEA_REMOVE_LEASE`                    | `bool`   | Whether the lease should be removed from the lease database | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)                                                  |
 | `KEA_FAKE_ALLOCATION`                 | `bool`   | Whether the query is a DISCOVER or a REQUEST                | [DHCPv4 hook API](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLeaseSelect)                                                   |
@@ -291,8 +289,6 @@ script.
 - `KEA_LEASE4_HWADDR`
 - `KEA_LEASE4_HOSTNAME`
 - `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE4_RENEW_TIMER`
-- `KEA_LEASE4_REBIND_TIMER`
 - `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_renew`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Renew)
@@ -319,8 +315,6 @@ script.
 - `KEA_LEASE4_HWADDR`
 - `KEA_LEASE4_HOSTNAME`
 - `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE4_RENEW_TIMER`
-- `KEA_LEASE4_REBIND_TIMER`
 - `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_release`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Release)
@@ -344,8 +338,6 @@ script.
 - `KEA_LEASE4_HWADDR`
 - `KEA_LEASE4_HOSTNAME`
 - `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE4_RENEW_TIMER`
-- `KEA_LEASE4_REBIND_TIMER`
 - `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_decline`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Decline)
@@ -369,8 +361,6 @@ script.
 - `KEA_LEASE4_HWADDR`
 - `KEA_LEASE4_HOSTNAME`
 - `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE4_RENEW_TIMER`
-- `KEA_LEASE4_REBIND_TIMER`
 - `KEA_LEASE4_VALID_LIFETIME`
 
 ### [`lease4_expire`](https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html#dhcpv4HooksLease4Expire)
@@ -382,8 +372,6 @@ script.
 - `KEA_LEASE4_HWADDR`
 - `KEA_LEASE4_HOSTNAME`
 - `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE4_RENEW_TIMER`
-- `KEA_LEASE4_REBIND_TIMER`
 - `KEA_LEASE4_VALID_LIFETIME`
 - `KEA_REMOVE_LEASE`
 
@@ -396,8 +384,6 @@ script.
 - `KEA_LEASE4_HWADDR`
 - `KEA_LEASE4_HOSTNAME`
 - `KEA_LEASE4_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE4_RENEW_TIMER`
-- `KEA_LEASE4_REBIND_TIMER`
 - `KEA_LEASE4_VALID_LIFETIME`
 
 
@@ -448,8 +434,6 @@ and reference of the possible values.  Booleans are simply expressed with
 | `KEA_LEASE6_STATE`                    | `string` | Current state of the lease                                                          | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a7075e6229e9eadedf27fc9ff49ece3c1)  |
 | `KEA_LEASE6_IS_EXPIRED`               | `bool`   | Whether the lease is expired                                                        |                                                                                                                                          |
 | `KEA_LEASE6_CLIENT_LAST_TRANSMISSION` | `int`    | Unix timestamp of the last message received from the client                         | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#ac71dc7f97dd753096a0f448c6649cdcf)  |
-| `KEA_LEASE6_RENEW_TIMER`              | `int`    | Renewal timer (T1), in seconds                                                      | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a181eba444070cba92db9e722377a1f0d)  |
-| `KEA_LEASE6_REBIND_TIMER`             | `int`    | Rebinding timer (T2), in seconds                                                    | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a3061e56eb6b364ce2a063cf920108ab4)  |
 | `KEA_LEASE6_VALID_LIFETIME`           | `int`    | Valid lifetime of the lease, in seconds                                             | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/d0/dee/structisc_1_1dhcp_1_1Lease.html#a615302a9140991942225b9809ddd50fb)  |
 | `KEA_LEASE6_PREFERRED_LIFETIME`       | `int`    | Preferred lifetime of the lease, in seconds                                         | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/ddc/structisc_1_1dhcp_1_1Lease6.html#acece7ab17d67a657637cf16a9a2f1f6e) |
 | `KEA_LEASE6_IAID`                     | `string` | Identity Association Identifier, to differentiate between IA containers             | [dhcpsrv/lease.h](https://jenkins.isc.org/job/Kea_doc/doxygen/da/ddc/structisc_1_1dhcp_1_1Lease6.html#acc2e175c33e09dbdc8c93b943488431e) |
@@ -554,8 +538,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
@@ -585,8 +567,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
@@ -616,8 +596,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
@@ -646,8 +624,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
@@ -677,8 +653,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
@@ -695,8 +669,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
@@ -714,8 +686,6 @@ script.
 - `KEA_LEASE6_STATE`
 - `KEA_LEASE6_IS_EXPIRED`
 - `KEA_LEASE6_CLIENT_LAST_TRANSMISSION`
-- `KEA_LEASE6_RENEW_TIMER`
-- `KEA_LEASE6_REBIND_TIMER`
 - `KEA_LEASE6_VALID_LIFETIME`
 - `KEA_LEASE6_PREFERRED_LIFETIME`
 - `KEA_LEASE6_IAID`
