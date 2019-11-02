@@ -23,6 +23,6 @@ s-messages: src/messages.mes
 clean:
 	rm -f src/*.o
 	rm -f src/messages.h src/messages.cc s-messages
-	rm -f kea-auth-radius.so
+	rm -f kea-hook-runscript.so
 
 -include $(DEPS)
