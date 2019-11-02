@@ -1,5 +1,20 @@
 # Changelog for kea-hook-runscript
 
+## 1.3.0 (2019-11-02)
+
+New features:
+
+- Add support for DHCP option 60 (#12)
+
+Fixes:
+
+- Fix build against Kea 1.6 (#16)
+- Fix build with older compilers
+
+Misc:
+
+- Licence code under the MPL
+
 ## 1.2.0 (2019-01-24)
 
 - Allow to run the script asynchronously (by setting `wait=false`, see `README`)
