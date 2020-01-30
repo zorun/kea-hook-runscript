@@ -1,5 +1,11 @@
 # Changelog for kea-hook-runscript
 
+## 1.3.2 (2020-01-31)
+
+Fixes:
+
+- Fix MAC address reported in `KEA_QUERY4_HWADDR` when the query is received from a DHCP relay (#17)
+
 ## 1.3.1 (2019-11-02)
 
 Misc:
