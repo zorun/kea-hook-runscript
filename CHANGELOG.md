@@ -1,5 +1,11 @@
 # Changelog for kea-hook-runscript
 
+## 1.3.3 (2020-02-27)
+
+Fixes:
+
+- Fix a crash in `lease6_expire` when IPv6 leases are reclaimed by Kea (#18)
+
 ## 1.3.2 (2020-01-31)
 
 Fixes:
