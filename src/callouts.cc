@@ -152,7 +152,11 @@ void extract_lease4(std::vector<std::string>& env, const Lease4Ptr lease)
     env.push_back("KEA_LEASE4_STATE=" + lease->basicStatesToText(lease->state_));
     extract_bool(env, "KEA_LEASE4_IS_EXPIRED", lease->expired());
     env.push_back("KEA_LEASE4_ADDRESS=" + lease->addr_.toText());
-    env.push_back("KEA_LEASE4_HWADDR=" + lease->hwaddr_->toText(false));
+    if (lease->hwaddr_) {
+        env.push_back("KEA_LEASE4_HWADDR=" + lease->hwaddr_->toText(false));
+    } else {
+        env.push_back("KEA_LEASE4_HWADDR=");
+    }
     env.push_back("KEA_LEASE4_HOSTNAME=" + lease->hostname_);
     env.push_back("KEA_LEASE4_CLIENT_LAST_TRANSMISSION=" + std::to_string(lease->cltt_));
     env.push_back("KEA_LEASE4_VALID_LIFETIME=" + std::to_string(lease->valid_lft_));
@@ -169,7 +173,11 @@ void extract_lease6(std::vector<std::string>& env, const Lease6Ptr lease)
         env.push_back("KEA_LEASE6_DELEGATED_PREFIX=" + lease->addr_.toText() + "/" + std::to_string(lease->prefixlen_));
         env.push_back("KEA_LEASE6_DELEGATED_PREFIXLEN=" + std::to_string(lease->prefixlen_));
     }
-    env.push_back("KEA_LEASE6_HWADDR=" + lease->hwaddr_->toText(false));
+    if (lease->hwaddr_) {
+        env.push_back("KEA_LEASE6_HWADDR=" + lease->hwaddr_->toText(false));
+    } else {
+        env.push_back("KEA_LEASE6_HWADDR=");
+    }
     env.push_back("KEA_LEASE6_HOSTNAME=" + lease->hostname_);
     env.push_back("KEA_LEASE6_CLIENT_DUID=" + lease->duid_->toText());
     env.push_back("KEA_LEASE6_CLIENT_LAST_TRANSMISSION=" + std::to_string(lease->cltt_));
