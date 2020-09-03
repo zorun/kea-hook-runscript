@@ -128,7 +128,9 @@ Some notes on Kea versions:
 - Kea 1.2 is missing a header file by mistake, so depending on your
   distribution, you may need to manually copy `option6_pdexclude.h` from
   the Kea git repository to `/usr/include/kea/dhcp/`.
-- Kea 1.3 to 1.6 should work out-of-the-box.
+- Kea 1.3 to 1.7 should work out-of-the-box.
+- Kea 1.8 needs to run without [multi-threading](https://kea.readthedocs.io/en/kea-1.8.0/arm/dhcp4-srv.html#multi-threading-settings).
+  Open a ticket if you need multi-threading support.
 
 ## How to use this hook
 
