@@ -9,6 +9,7 @@
 #include <dhcp/pkt4.h>
 #include <dhcp/dhcp6.h>
 #include <dhcp/pkt6.h>
+#include <dhcp/option4_addrlst.h>
 #include <dhcp/option6_ia.h>
 #include <dhcpsrv/subnet.h>
 #include <dhcpsrv/lease.h>
@@ -61,6 +62,21 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
     OptionPtr option60 = pkt4->getOption(60);
     if (option60) {
         env.push_back(envprefix + "OPTION60=" + option60->toString());
+    }
+
+    OptionPtr rai = pkt4->getOption(82);
+    if (rai) {
+        env.push_back(envprefix + "RAI=" + rai->toHexString());
+
+        OptionPtr circuit_id = rai->getOption(RAI_OPTION_AGENT_CIRCUIT_ID);
+        if (circuit_id) {
+            env.push_back(envprefix + "RAI_CIRCUIT_ID=" + circuit_id->toHexString());
+        }
+
+        OptionPtr remote_id = rai->getOption(RAI_OPTION_REMOTE_ID);
+        if (remote_id) {
+            env.push_back(envprefix + "RAI_REMOTE_ID=" + remote_id->toHexString());
+        }
     }
 }
 
