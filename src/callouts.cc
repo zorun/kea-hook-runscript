@@ -62,6 +62,21 @@ void extract_pkt4(std::vector<std::string>& env, const std::string envprefix, co
     if (option60) {
         env.push_back(envprefix + "OPTION60=" + option60->toString());
     }
+
+    OptionPtr rai = pkt4->getOption(82);
+    if (rai) {
+        env.push_back(envprefix + "RAI=" + rai->toHexString());
+
+        OptionPtr circuit_id = rai->getOption(RAI_OPTION_AGENT_CIRCUIT_ID);
+        if (circuit_id) {
+            env.push_back(envprefix + "RAI_CIRCUIT_ID=" + circuit_id->toHexString());
+        }
+
+        OptionPtr remote_id = rai->getOption(RAI_OPTION_REMOTE_ID);
+        if (remote_id) {
+            env.push_back(envprefix + "RAI_REMOTE_ID=" + remote_id->toHexString());
+        }
+    }
 }
 
 void extract_query4(std::vector<std::string>& env, const Pkt4Ptr query)
