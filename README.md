@@ -56,6 +56,18 @@ it may be easier to just write a Kea hook yourself.
 If you have more examples of usage, feel free to contribute your Kea
 config and your scripts!
 
+### Managing routes for IPv6 delegated prefixes
+
+When delegating IPv6 prefixes with DHCPv6-PD, it is necessary to add the corresponding routes
+in the kernel.
+
+This example script adds/removes static IPv6 routes whenever Kea delegates an IPv6 prefix
+through DHCPv6-PD or when the lease expires.
+
+See the included [README](examples/ipv6_prefix_delegation/README.md) for more
+explanations and the [source](examples/ipv6_prefix_delegation) with the script and
+an example Kea configuration.
+
 ### Handing out IPv4 addresses in /32 subnets
 
 This example allows to lease IPv4 addresses individually (/32 subnets), by
