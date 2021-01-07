@@ -1,0 +1,53 @@
+
+build-debian-ubuntu:
+  stage: build
+  image: $DISTRO:$RELEASE
+  before_script:
+    - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https curl gnupg2
+    - curl -1sLf "https://dl.cloudsmith.io/public/isc/kea-${KEA_VERSION}/cfg/gpg/gpg.${GPG_KEY}.key" | apt-key add -
+    - curl -1sLf "https://dl.cloudsmith.io/public/isc/kea-${KEA_VERSION}/cfg/setup/config.deb.txt?distro=${DISTRO}&codename=${RELEASE}" > /etc/apt/sources.list.d/isc-kea.list
+    - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y isc-kea-dev libboost-dev g++ make
+  script:
+    - make -j
+  rules:
+    - changes:
+      - .gitlab-ci.yml
+      - src/*
+      - Makefile
+  parallel:
+    matrix:
+      - KEA_VERSION: "1-6"
+        GPG_KEY: "0607E2621F1564A6"
+        DISTRO: debian
+        RELEASE: [stretch, buster]
+      - KEA_VERSION: "1-7"
+        GPG_KEY: "40544590508A17DE"
+        DISTRO: debian
+        RELEASE: [stretch, buster]
+      - KEA_VERSION: "1-8"
+        GPG_KEY: "4DD5AE28ADA7268E"
+        DISTRO: debian
+        RELEASE: [stretch, buster]
+      - KEA_VERSION: "1-9"
+        GPG_KEY: "5DC67B0A74E30739"
+        DISTRO: debian
+        RELEASE: [stretch, buster]
+      - KEA_VERSION: "1-6"
+        GPG_KEY: "0607E2621F1564A6"
+        DISTRO: ubuntu
+        RELEASE: [bionic]
+      - KEA_VERSION: "1-7"
+        GPG_KEY: "40544590508A17DE"
+        DISTRO: ubuntu
+        RELEASE: [bionic, focal]
+      - KEA_VERSION: "1-8"
+        GPG_KEY: "4DD5AE28ADA7268E"
+        DISTRO: ubuntu
+        RELEASE: [bionic, focal]
+      - KEA_VERSION: "1-9"
+        GPG_KEY: "5DC67B0A74E30739"
+        DISTRO: ubuntu
+        RELEASE: [bionic, focal]
+  artifacts:
+    paths:
+      - kea-hook-runscript.so
