@@ -56,14 +56,28 @@ build-debian-ubuntu:
   artifacts:
     paths:
       - kea-hook-runscript*.so
-    expire_in: 1 day
+    expire_in: 2 days
 
 # Collect all artifacts in the same job: easier to browse
-collect-artifacts:
+collect-artifacts-snapshot:
   stage: collect
   script:
     - ls -lh kea-hook-runscript*.so
   artifacts:
     paths:
       - kea-hook-runscript*.so
-    expire_in: 30 days
+    expire_in: 15 days
+  except:
+    - tags
+
+# Same for tagged releases, with no expiration
+collect-artifacts-release:
+  stage: collect
+  script:
+    - ls -lh kea-hook-runscript*.so
+  artifacts:
+    paths:
+      - kea-hook-runscript*.so
+    expire_in: never
+  only:
+    - tags
