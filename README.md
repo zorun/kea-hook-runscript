@@ -1,3 +1,5 @@
+![CI status](https://code.ffdn.org/zorun/kea-hook-runscript/badges/master/pipeline.svg)
+
 # About kea-hook-runscript
 
 This a hook for the Kea DHCP server that allows to run an external script
@@ -90,10 +92,19 @@ is to continously display the content of this file:
 
     tail -F /tmp/kea-hook-runscript-debug.log
 
+## Pre-built binaries
+
+Since version 1.4.0, we have a CI system to build the hook on various OS and for various
+versions of Kea. It's new, so there might be bugs.
+
+The binaries are available from the [release page](https://github.com/zorun/kea-hook-runscript/releases)
+or you can directly
+[browse through the pipeline results](https://code.ffdn.org/zorun/kea-hook-runscript/-/pipelines).
+
 ## How to build
 
-To build the hook, you need the Kea libraries as well as the Kea and Boost development
-headers.
+If you want to build the hook yourself, you need the Kea libraries as well
+as the Kea and Boost development headers.
 
 ### Using a packaged version of Kea
 
@@ -107,7 +118,7 @@ However, it is currently unsupported and is only available in sid.
 
 Then, to build the hook, simply run:
 
-    $ make -j
+    $ make -j4
 
 ### Using Kea source
 
