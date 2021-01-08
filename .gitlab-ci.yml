@@ -1,3 +1,6 @@
+stages:
+  - build
+  - collect
 
 build-debian-ubuntu:
   stage: build
@@ -53,3 +56,14 @@ build-debian-ubuntu:
   artifacts:
     paths:
       - kea-hook-runscript*.so
+    expire_in: 1 day
+
+# Collect all artifacts in the same job: easier to browse
+collect-artifacts:
+  stage: collect
+  script:
+    - ls -lh kea-hook-runscript*.so
+  artifacts:
+    paths:
+      - kea-hook-runscript*.so
+    expire_in: 30 days
