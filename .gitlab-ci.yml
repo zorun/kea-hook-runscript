@@ -11,7 +11,7 @@ build-debian-ubuntu:
     - curl -1sLf "https://dl.cloudsmith.io/public/isc/kea-${KEA_VERSION}/cfg/setup/config.deb.txt?distro=${DISTRO}&codename=${RELEASE}" > /etc/apt/sources.list.d/isc-kea.list
     - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y isc-kea-dev libboost-dev g++ make
   script:
-    - make -j
+    - make -j4
   after_script:
     - mv kea-hook-runscript.so kea-hook-runscript-kea-${KEA_VERSION}-${DISTRO}-${RELEASE}.so
   rules:
