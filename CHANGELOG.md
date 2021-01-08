@@ -1,5 +1,23 @@
 # Changelog for kea-hook-runscript
 
+## 1.4.0 (2021-01-08)
+
+New features:
+
+- Add support for DHCP option 82, Relay Agent Information (#22)
+- Generate binaries with a [CI system](https://code.ffdn.org/zorun/kea-hook-runscript/-/pipelines)
+  Currently, Debian and Ubuntu are supported, for Kea versions from 1.6 to 1.9.
+  Binaries are attached to this release for convenience.
+
+Fixes:
+
+- Ship pre-built `messages.{cc,h}` to avoid build dependency on kea-msg-compiler.
+  This should make it easier to build the hook from git.
+
+Misc:
+
+- Add IPv6 prefix delegation example
+
 ## 1.3.3 (2020-02-27)
 
 Fixes:
