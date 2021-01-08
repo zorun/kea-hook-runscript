@@ -19,6 +19,7 @@ build-debian-ubuntu:
       - .gitlab-ci.yml
       - src/*
       - Makefile
+      - CHANGELOG.md
   parallel:
     matrix:
       - KEA_VERSION: "1-6"
