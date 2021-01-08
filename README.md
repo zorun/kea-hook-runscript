@@ -1,4 +1,4 @@
-![CI status](https://code.ffdn.org/zorun/kea-hook-runscript/badges/master/pipeline.svg)
+[![CI status](https://code.ffdn.org/zorun/kea-hook-runscript/badges/master/pipeline.svg)](https://code.ffdn.org/zorun/kea-hook-runscript/-/pipelines)
 
 # About kea-hook-runscript
 
