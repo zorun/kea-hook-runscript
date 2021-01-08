@@ -6,8 +6,9 @@ build on debian-like OS:
     - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https curl gnupg2
     - curl -1sLf "https://dl.cloudsmith.io/public/isc/kea-${KEA_VERSION}/cfg/gpg/gpg.${GPG_KEY}.key" | apt-key add -
     - curl -1sLf "https://dl.cloudsmith.io/public/isc/kea-${KEA_VERSION}/cfg/setup/config.deb.txt?distro=${DISTRO}&codename=${RELEASE}" > /etc/apt/sources.list.d/isc-kea.list
-    - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y isc-kea-dev libboost-dev g++ make
+    - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y isc-kea-dev libboost-dev g++ make liblog4cplus-dev
   script:
+    - export KEA_MSG_COMPILER=ci/kea-msg-compiler
     - make -j
   rules:
     - changes:
