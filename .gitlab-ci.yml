@@ -9,6 +9,8 @@ build-debian-ubuntu:
     - apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y isc-kea-dev libboost-dev g++ make
   script:
     - make -j
+  after_script:
+    - mv kea-hook-runscript.so kea-hook-runscript-kea-${KEA_VERSION}-${DISTRO}-${RELEASE}.so
   rules:
     - changes:
       - .gitlab-ci.yml
@@ -50,4 +52,4 @@ build-debian-ubuntu:
         RELEASE: [bionic, focal]
   artifacts:
     paths:
-      - kea-hook-runscript.so
+      - kea-hook-runscript*.so
