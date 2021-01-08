@@ -62,6 +62,7 @@ build-debian-ubuntu:
 # Collect all artifacts in the same job: easier to browse
 collect-artifacts-snapshot:
   stage: collect
+  allow_failure: true
   script:
     - ls -lh kea-hook-runscript*.so
   artifacts:
