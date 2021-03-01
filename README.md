@@ -198,6 +198,16 @@ Refer to the Kea documentation for more information about each hook point:
 - DHCPv4 hooks reference: <https://jenkins.isc.org/job/Kea_doc/doxygen/de/df3/dhcpv4Hooks.html>
 - DHCPv6 hooks reference: <https://jenkins.isc.org/job/Kea_doc/doxygen/d1/d02/dhcpv6Hooks.html>
 
+# Frequently Asked Questions
+
+## I get "Operation not permitted" when trying to add route in my script
+
+The script is run with the same user as Kea: if this is not root, then the script will
+not have permission to change the routing table.
+
+Either run Kea as root, or use a passwordless sudo configuration, see
+[issue 24](https://github.com/zorun/kea-hook-runscript/issues/24).
+
 # Reference of variables passed to the external script
 
 ## DHCPv4 variables
