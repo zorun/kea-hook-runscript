@@ -39,6 +39,19 @@ In the future, the hook will possibly feed the return code of the external scrip
 back into Kea.  This would allow the external script to cancel part of Kea's normal processing
 (for instance, it could be possible to easily implement a flexible host blacklist this way).
 
+## Alternative
+
+Since Kea 1.9.5, a similar hook is provided by ISC: <https://kea.readthedocs.io/en/latest/arm/hooks.html#run-script-support>
+
+It has similar functionalities: information is passed to the script through environment
+variables.  However, only **asynchronous** execution is supported in ISC's hook, at
+least as of Kea 1.9.5.
+
+Which hook to use is up to you: the ISC one will probably be better maintained when
+new versions of Kea come out, while this one supports synchronous execution which is safer.
+Also, environment variables are different between the two hooks, which can be an important
+factor if you need to process specific sub-options in your script.
+
 ## Use-cases
 
 Given the limitations exposed above, here are some example use-cases for which
